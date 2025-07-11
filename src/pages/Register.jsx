@@ -2,7 +2,7 @@ import '../styles/Register.css'
 import '../styles/common.css'
 
 const Register = () => (
-    <div className="main flex-row justify-between items-center fullscreen">
+    <div className="main items-center fullscreen">
         <p className='title'>Nostalgia</p>
         <LoginCard />
     </div>

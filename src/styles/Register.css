@@ -8,6 +8,8 @@
   --clickBtnColor: #3d7990;
 
   --inputHighlightColor: #5796da;
+
+  --highlightLinkColor: #5796da
 }
 
 
@@ -17,6 +19,10 @@
 
     padding-right: 10dvw;
     padding-left: 10vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .title{
@@ -27,28 +33,30 @@
 
 /* card */
 .registerCard{
-    width: 28dvw;
-    aspect-ratio: 17/20;
+    font-size: 2dvw;
+    width: 12em;
+    height: 16em;
     background-color: #88C7E9;
-    border-radius: 3dvw;
-    padding: 3rem;
+    border-radius: 1.5em;
+    padding: 1.6em;
+    margin-right: 1em;
 }
 
 .cardText{
     color: var(--mainColor);
-    font-size: 2rem;
+    font-size: 1.5em;
 }
 
 .cardInput{
-    font-size: 1.2rem;
+    font-size: .63em;
 
-    height: 2.6rem;
-    width: 16rem;
+    height: 2.6em;
+    width: 13.5em;
     background-color: #FFFFFF;
-    border: .2rem var(--mainColor) solid;
-    border-radius: 5rem;
-    padding: .2rem 1rem;
-    margin: .4rem;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .3em;
 }
     .cardInput::placeholder {
         color: #9A9CE6;
@@ -65,16 +73,16 @@
     
 .cardBtn{
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: .63em;
     color: #FFFFFF;
     
-    height: 2.7rem;
-    width: 13rem;
+    height: 2.25em;
+    width: 13em;
     background-color: var(--mainBtnColor);
-    border-radius: 5rem;
+    border-radius: 5em;
 
-    margin: .2rem;
-    padding: .4rem 1rem;
+    margin: .2em;
+    padding: .4em 1em;
 }
     .cardBtn:hover {
         box-sizing: border-box;
@@ -86,7 +94,29 @@
     }
 
 .cardLink{
-    font-size: 1rem;
+    color: var(--mainColor);
+    font-size: .55em;
     padding: 0;
     margin: 0;
+}
+    .cardLink:hover {
+        color: var(--highlightLinkColor);
+        text-decoration: underline;
+    }
+
+@media(max-width: 900px) {
+    .main{
+        flex-direction: column;
+        justify-content: center;
+        gap: 9dvh;
+    }
+
+    .title{
+        font-size: 10dvh;
+    }
+
+    .registerCard{
+        font-size: 3.5dvh;
+        margin: 0;
+    }
 }
