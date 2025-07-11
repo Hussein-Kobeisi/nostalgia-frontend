@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+
+:root {
+  --mainColor: #222355;
+
+  --mainBtnColor: #333472;
+  --clickBtnColor: #3d7990;
+
+  --inputHighlightColor: #5796da;
+}
+
+
+/* page */
+.main{
+    background-color: var(--mainColor);
+
+    padding-right: 10dvw;
+    padding-left: 10vw;
+}
+
+.title{
+    font-size: 9dvw;
+    font-family: 'Nova Mono';
+    color: #FFFFFF;
+}
+
+/* card */
+.registerCard{
+    width: 28dvw;
+    aspect-ratio: 17/20;
+    background-color: #88C7E9;
+    border-radius: 3dvw;
+    padding: 3rem;
+}
+
+.cardText{
+    color: var(--mainColor);
+    font-size: 2rem;
+}
+
+.cardInput{
+    font-size: 1.2rem;
+
+    height: 2.6rem;
+    width: 16rem;
+    background-color: #FFFFFF;
+    border: .2rem var(--mainColor) solid;
+    border-radius: 5rem;
+    padding: .2rem 1rem;
+    margin: .4rem;
+}
+    .cardInput::placeholder {
+        color: #9A9CE6;
+    }
+    .cardInput:hover {
+        box-sizing: border-box;
+        transition: 50ms;
+        border: var(--inputHighlightColor) .2rem solid;
+    }
+    /* .cardInput:focus{
+        font-size: .1rem;
+    } */
+
+    
+.cardBtn{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    
+    height: 2.7rem;
+    width: 13rem;
+    background-color: var(--mainBtnColor);
+    border-radius: 5rem;
+
+    margin: .2rem;
+    padding: .4rem 1rem;
+}
+    .cardBtn:hover {
+        box-sizing: border-box;
+        transition: 50ms;
+        border: #ffffff solid .1rem;
+    }
+    .cardBtn:active {
+        background-color: var(--clickBtnColor);   /* on click */
+    }
+
+.cardLink{
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+}
