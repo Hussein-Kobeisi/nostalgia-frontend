@@ -38,13 +38,17 @@
     height: 16em;
     background-color: #88C7E9;
     border-radius: 1.5em;
-    padding: 1.6em;
+    padding: 1em;
     margin-right: 1em;
 }
 
 .cardText{
     color: var(--mainColor);
     font-size: 1.5em;
+}
+
+.signCardInputDiv{
+    margin: .5em 0;
 }
 
 .cardInput{
@@ -57,6 +61,17 @@
     border-radius: 5em;
     padding: .2em 1em;
     margin: .3em;
+}
+.signCardInput{
+    font-size: .6em;
+
+    height: 2em;
+    width: 15em;
+    background-color: #FFFFFF;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .1em;
 }
     .cardInput::placeholder {
         color: #9A9CE6;
