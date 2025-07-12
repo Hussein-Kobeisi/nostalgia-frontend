@@ -10,6 +10,8 @@
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .bigPublicText{
@@ -38,3 +40,27 @@
     border-top: #FFE7D5 solid .1em;
     
 }
+
+.publicDisplayRow{
+    width: 100dvw;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-left: 3dvw;
+}
+    .publicDisplayRow::-webkit-scrollbar {
+    height: 8px; /* horizontal scrollbar height */
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-track {
+    background: #ff000000;
+    border-radius: 10px;
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-thumb {
+    background: #ffe7d575;
+    border-radius: 10px;
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-thumb:hover {
+    background: rgba(213, 177, 150, 0.775);
+    }

@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import '../styles/common.css'
 import '../styles/PublicWall.css'
+import {CapsuleCard} from './components/capsuleCards.jsx'
 
 const PublicWall = () => (
     <div className="mainPage flex-col publicMain">
@@ -12,7 +13,8 @@ const PublicWall = () => (
         <div className='publicYearDiv flex-col items-center'>
             2020s
         </div>
-        <>srg</>
+        <CapsuleList />
+        
         <div className='publicYearDiv flex-col items-center'>
             2015s
         </div>
@@ -20,6 +22,20 @@ const PublicWall = () => (
         <div className='publicYearDiv flex-col items-center'>
             2010s
         </div>
+    </div>
+)
+
+const CapsuleList = () =>  (
+    <div className='publicDisplayRow  flex-row'>
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
     </div>
 )
 

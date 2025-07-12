@@ -11,6 +11,8 @@
 
     padding: 0 .5em;
     position: fixed;
+
+    z-index: 10;
 }
 
 .userImg{

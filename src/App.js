@@ -7,23 +7,21 @@ import UserProfile from './pages/UserProfile.jsx';
 import PageHeader from './pages/pageHeader.jsx';
 
 import './App.css';
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {Routes, Route, useLocation } from "react-router-dom";
 
 
 function App() {
     return (
         <div className='appContainer'>
-            <BrowserRouter>
-                <ConditionalPageHeader />
-                <Routes>
+              <ConditionalPageHeader />
+              <Routes>
                     <Route path='/' element={<Home />}></Route>
                     <Route path='/register' element={<Register />}></Route>
                     <Route path='/publicwall' element={<PublicWall />}></Route>
                     <Route path='/userwall' element={<UserWall />}></Route>
                     <Route path='/capsule' element={<CapsulePage />}></Route>
                     <Route path='/profile' element={<UserProfile />}></Route>
-                </Routes>
-            </BrowserRouter>
+              </Routes>
         </div>
     );
 }
