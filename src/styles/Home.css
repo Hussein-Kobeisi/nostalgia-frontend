@@ -1,0 +1,65 @@
+:root {
+  --mainColor: #222355;
+
+  --mainBtnColor: #88C7E9;
+  --BtnTextColor: #333472;
+  --clickBtnColor: #3d7990;
+
+  --inputHighlightColor: #5796da;
+
+  --highlightLinkColor: #5796da
+}
+
+.main{
+    background-color: var(--mainColor);
+
+    padding-right: 10dvw;
+    padding-left: 10vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    gap: 10dvw;
+}
+
+.title{
+    font-size: 7dvw;
+    font-family: 'Nova Mono';
+    color: #FFFFFF;
+}
+
+.homeText{
+    font-size: 1.5dvw;
+    font-family: 'Nova Mono';
+    color: #FFFFFF;
+}
+
+.Btn{
+    font-weight: bold;
+    font-size: 2.3dvw;
+    color: var(--BtnTextColor);
+    
+    height: 2.25em;
+    width: 10em;
+    background-color: var(--mainBtnColor);
+    border-radius: 0.8em;
+}
+    .Btn:hover {
+        box-sizing: border-box;
+        transition: 50ms;
+        border: #345ed1 solid .4rem;
+    }
+    .Btn:active {
+        border: 0;
+        color: white;
+        background-color: var(--clickBtnColor);   /* on click */
+    }
+
+.div1{
+    gap: 10dvh;
+}
+
+.div2{
+    gap: 20dvh;
+}
