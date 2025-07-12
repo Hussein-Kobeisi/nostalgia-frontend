@@ -1,0 +1,40 @@
+.publicTextDiv{
+}
+
+.publicMain{
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.bigPublicText{
+    font-size: 6dvw;
+    font-family: 'Nova Mono';
+    margin-top: 2em;
+    padding-bottom: 1.5em;
+    
+}
+
+.smallPublicText{
+    font-family: 'Marck Script', cursive;
+    font-size: 2.5dvw;
+    padding-bottom: 5em;
+}
+
+.publicYearDiv{
+    color: #723C95;
+    font-size: 7dvw;
+    font-family: 'Inria Serif', serif;
+
+    width: 100dvw;
+
+    background-color: #A3CBDE;
+    border-bottom: #FFE7D5 solid .1em;
+    border-top: #FFE7D5 solid .1em;
+    
+}

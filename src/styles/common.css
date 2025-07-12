@@ -16,8 +16,20 @@ button, input{
     justify-content: space-between;
 }
 
+.justify-center{
+    justify-content: center;
+}
+
 .items-center{
     align-items: center;
+}
+
+.items-start{
+    align-items: flex-start;
+}
+
+.items-end{
+    align-items: flex-end;
 }
 
 .fullscreen{

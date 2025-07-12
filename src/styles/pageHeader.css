@@ -10,6 +10,7 @@
     font-family: 'Nova Mono';
 
     padding: 0 .5em;
+    position: fixed;
 }
 
 .userImg{
