@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+
+:root {
+  --mainColor: #222355;
+
+  --mainBtnColor: #333472;
+  --clickBtnColor: #3d7990;
+
+  --inputHighlightColor: #5796da;
+
+  --highlightLinkColor: #5796da
+}
+
+
+/* page */
+.main{
+    background-color: var(--mainColor);
+
+    padding-right: 10dvw;
+    padding-left: 10vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title{
+    font-size: 9dvw;
+    font-family: 'Nova Mono';
+    color: #FFFFFF;
+}
+
+/* card */
+.registerCard{
+    font-size: 2dvw;
+    width: 12em;
+    /* height: 16em; */
+    background-color: #88C7E9;
+    border-radius: 1.5em;
+    padding: 1em;
+    margin-right: 1em;
+}
+
+.cardText{
+    color: var(--mainColor);
+    font-size: 1.5em;
+}
+
+.signCardInputDiv{
+    margin: .5em 0;
+}
+
+.cardInput{
+    font-size: .63em;
+
+    height: 2.6em;
+    width: 13.5em;
+    background-color: #FFFFFF;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .3em;
+}
+.signCardInput{
+    font-size: .6em;
+
+    height: 2em;
+    width: 15em;
+    background-color: #FFFFFF;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .1em;
+}
+    .cardInput::placeholder {
+        color: #9A9CE6;
+    }
+    .cardInput:hover {
+        box-sizing: border-box;
+        transition: 50ms;
+        border: var(--inputHighlightColor) .2rem solid;
+    }
+    /* .cardInput:focus{
+        font-size: .1rem;
+    } */
+
+    
+.cardBtn{
+    font-weight: bold;
+    font-size: .63em;
+    color: #FFFFFF;
+    
+    height: 2.25em;
+    width: 13em;
+    background-color: var(--mainBtnColor);
+    border-radius: 5em;
+
+    margin: .2em;
+    padding: .4em 1em;
+}
+    .cardBtn:hover {
+        box-sizing: border-box;
+        transition: 50ms;
+        border: #ffffff solid .1rem;
+    }
+    .cardBtn:active {
+        background-color: var(--clickBtnColor);   /* on click */
+    }
+
+.cardLink{
+    color: var(--mainColor);
+    font-size: .55em;
+    padding: 0;
+    margin: 0;
+}
+    .cardLink:hover {
+        color: var(--highlightLinkColor);
+        text-decoration: underline;
+    }
+
+
+.inputErrorMsg{
+    font-weight: 500;
+    color: rgb(255, 0, 0);
+    font-size: .45em;
+}
+
+.errorInput{
+    border-color: red;
+}
+
+@media(max-width: 900px) {
+    .main{
+        flex-direction: column;
+        justify-content: center;
+        gap: 9dvh;
+    }
+
+    .title{
+        font-size: 10dvh;
+    }
+
+    .registerCard{
+        font-size: 3.5dvh;
+        margin: 0;
+    }
+}
