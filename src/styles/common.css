@@ -24,3 +24,16 @@
 .bold{
     font-weight: bold;
 }
+
+.mainPage{
+    width: 100dvw;
+    height: 100dvh;
+
+    align-items: center;
+
+    background-color: var(--mainColor);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

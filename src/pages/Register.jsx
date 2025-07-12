@@ -15,9 +15,9 @@ const Register = () => {
 
     
     return(
-    <div className="main items-center fullscreen">
+    <div className="mainPage regPage">
 
-        <p className='title'>Nostalgia</p>
+        <p className='regTitle'>Nostalgia</p>
 
         {isLogin ?  <LoginCard setLogin={setLogin} register={login}/> : 
                     <SignUpCard setLogin={setLogin} register={signup}/>}

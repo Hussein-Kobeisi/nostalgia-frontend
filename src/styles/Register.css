@@ -14,18 +14,12 @@
 
 
 /* page */
-.main{
-    background-color: var(--mainColor);
-
+.regPage{
     padding-right: 10dvw;
     padding-left: 10vw;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
-.title{
+.regTitle{
     font-size: 9dvw;
     font-family: 'Nova Mono';
     color: #FFFFFF;
