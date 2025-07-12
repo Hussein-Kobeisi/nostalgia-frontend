@@ -10,21 +10,15 @@
   --highlightLinkColor: #5796da
 }
 
-.main{
-    background-color: var(--mainColor);
+.homePage{
+    gap: 10dvw;
 
     padding-right: 10dvw;
     padding-left: 10vw;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    gap: 10dvw;
 }
 
-.title{
-    font-size: 7dvw;
+.homeTitle{
+    font-size: 6dvw;
     font-family: 'Nova Mono';
     color: #FFFFFF;
 }
@@ -35,31 +29,31 @@
     color: #FFFFFF;
 }
 
-.Btn{
+.homeBtn{
     font-weight: bold;
-    font-size: 2.3dvw;
+    font-size: 2dvw;
     color: var(--BtnTextColor);
     
     height: 2.25em;
     width: 10em;
-    background-color: var(--mainBtnColor);
+    background-color: #88C7E9;
     border-radius: 0.8em;
 }
-    .Btn:hover {
+    .homeBtn:hover {
         box-sizing: border-box;
         transition: 50ms;
         border: #345ed1 solid .4rem;
     }
-    .Btn:active {
+    .homeBtn:active {
         border: 0;
         color: white;
         background-color: var(--clickBtnColor);   /* on click */
     }
 
-.div1{
+.homeDiv1{
     gap: 10dvh;
 }
 
-.div2{
-    gap: 20dvh;
+.homeDiv2{
+    gap: 30dvh;
 }

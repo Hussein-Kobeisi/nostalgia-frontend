@@ -1,19 +1,19 @@
+import {useNavigate} from 'react-router-dom';
 import '../styles/common.css'
 import '../styles/Home.css'
-import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate()
 
     return(
-    <div className="main flex-row items-center fullscreen">
-        <div className='flex-col items-center div1'>
+    <div className="mainPage flex-row homePage">
+        <div className='flex-col items-center homeDiv1'>
             <p className='homeText'>{homeText}</p>
             <div className='homeText'> 3 capsules here</div>
         </div>
-        <div className='flex-col items-center div2'>
-            <p className='title'>Nostalgia</p>
-            <button className='Btn' onClick={() => navigate('/register')}>Go To Login</button>
+        <div className='flex-col items-center homeDiv2'>
+            <p className='homeTitle'>Nostalgia</p>
+            <button className='homeBtn' onClick={() => navigate('/register')}>Go To Login</button>
         </div>
     </div>
 )}
