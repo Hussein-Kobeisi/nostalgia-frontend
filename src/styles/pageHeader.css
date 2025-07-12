@@ -1,0 +1,25 @@
+.pageHeaderMain{
+    width: 100dvw;
+    font-size: 1.8dvw;
+    flex-shrink: 0;
+
+    background-color: #A3CBDE;
+    border-bottom: #FFE7D5 solid 0.3em;
+
+    color: #222355;
+    font-family: 'Nova Mono';
+
+    padding: 0 .5em;
+}
+
+.userImg{
+    background-color: white;
+    border: #222355 solid 0.2em;
+    border-radius: 1em;
+    
+    width: 1.5em;
+    aspect-ratio: 1/1;
+    
+    margin: .2em;
+}
+
