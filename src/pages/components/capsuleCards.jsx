@@ -2,20 +2,20 @@ import '../../styles/capsuleCards.css'
 import {useNavigate} from 'react-router-dom'
 
 
-export const CapsuleCard = () => {
+export const CapsuleCard = ({capData}) => {
     const navigate = useNavigate()
 
     return(
-        <div className="capsuleCardMain flex-col items-center" onClick={() => navigate('/capsule')}>
+        <div className="capsuleCardMain flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
             <div className='flex-row justify-start items-center capsuleUserDiv'>
-                <img className='capsuleUserImage' src='https://picsum.photos/200/300' alt='capsule' />
-                <p className='capsuleUsername'>Username</p>
+                <img className='capsuleUserImage' src={capData.userImg} alt='capsule' />
+                <p className='capsuleUsername'>{capData.userName}</p>
             </div>
-            <p className='capsuleNameText'>Capsule Name</p>
+            <p className='capsuleNameText'>{capData.capName}</p>
             <div className='capsuleContentsDiv flex-col justify-between items-center'>
-                1 video <br/>
-                3 images <br/>
-                10 texts <br/>
+                {capData.videoCount} videos <br/>
+                {capData.imgCount} images <br/>
+                {capData.textCount} texts <br/>
             </div>
         </div>
     )
