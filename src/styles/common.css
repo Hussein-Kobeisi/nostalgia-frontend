@@ -41,6 +41,10 @@ button, input{
     font-weight: bold;
 }
 
+.wrap{
+    flex-wrap: wrap;
+}
+
 .mainPage{
     width: 100dvw;
     /* height: 100dvh; */
