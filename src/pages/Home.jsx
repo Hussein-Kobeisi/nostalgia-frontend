@@ -13,7 +13,10 @@ const Home = () => {
         </div>
         <div className='flex-col items-center homeDiv2'>
             <p className='homeTitle'>Nostalgia</p>
-            <button className='homeBtn' onClick={() => navigate('/register')}>Go To Login</button>
+            <div className='homeBtnsDiv flex-col items-center'>
+                <button className='homeBtn' onClick={() => navigate('/register')}>Go To Login</button>
+                <button className='homeBtn' onClick={() => navigate('/publicwall')}>View Public Posts</button>
+            </div>
         </div>
     </div>
 )}

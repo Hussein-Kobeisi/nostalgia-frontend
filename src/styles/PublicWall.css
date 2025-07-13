@@ -1,0 +1,97 @@
+.publicTextDiv{
+}
+
+.publicMain{
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.bigPublicText{
+    font-size: 6dvw;
+    font-family: 'Nova Mono';
+    margin-top: 2em;
+    padding-bottom: 1.5em;
+    
+}
+
+.smallPublicText{
+    font-family: 'Marck Script', cursive;
+    font-size: 2.5dvw;
+    padding-bottom: 5em;
+}
+
+.publicYearDiv{
+    color: #723C95;
+    font-size: 7dvw;
+    font-family: 'Inria Serif', serif;
+
+    width: 100dvw;
+
+    background-color: #A3CBDE;
+    border-bottom: #FFE7D5 solid .1em;
+    border-top: #FFE7D5 solid .1em;
+    
+}
+
+.publicDisplayRow{
+    width: 100dvw;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-left: 3dvw;
+}
+    .publicDisplayRow::-webkit-scrollbar {
+    height: 8px; /* horizontal scrollbar height */
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-track {
+    background: #ff000000;
+    border-radius: 10px;
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-thumb {
+    background: #ffe7d575;
+    border-radius: 10px;
+    }
+
+    .publicDisplayRow::-webkit-scrollbar-thumb:hover {
+    background: rgba(213, 177, 150, 0.775);
+    }
+
+.capsuleListDiv{
+    position: relative;
+}
+.capsuleListScrollBtn{
+    font-size: 3dvw;
+    color: #7322A2;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    height: 1.5em;
+    aspect-ratio: 1;
+
+    border-radius: 5em;
+
+    background-color: white;
+
+    z-index: 1;
+    position: absolute;
+    top: calc(50% - .7em);
+}
+    .capsuleListScrollBtnRight{
+        right: .5em;
+    }
+    .capsuleListScrollBtnLeft{
+        left: .5em;
+    }
+    .diabledBtn{
+        opacity: 50%;
+        cursor: auto;
+    }

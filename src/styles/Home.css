@@ -38,6 +38,7 @@
     width: 10em;
     background-color: #88C7E9;
     border-radius: 0.8em;
+    margin: .3em;
 }
     .homeBtn:hover {
         box-sizing: border-box;
@@ -55,5 +56,5 @@
 }
 
 .homeDiv2{
-    gap: 30dvh;
+    gap: 20dvh;
 }

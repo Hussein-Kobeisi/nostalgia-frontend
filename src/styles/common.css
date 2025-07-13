@@ -1,3 +1,7 @@
+button, input{
+    cursor: pointer;
+}
+
 .flex-row{
     display: flex;
     flex-direction: row;
@@ -12,8 +16,20 @@
     justify-content: space-between;
 }
 
+.justify-center{
+    justify-content: center;
+}
+
 .items-center{
     align-items: center;
+}
+
+.items-start{
+    align-items: flex-start;
+}
+
+.items-end{
+    align-items: flex-end;
 }
 
 .fullscreen{
@@ -27,7 +43,10 @@
 
 .mainPage{
     width: 100dvw;
-    height: 100dvh;
+    /* height: 100dvh; */
+    flex: 1 1 auto;
+    overflow: auto; 
+    flex-grow: 1;
 
     align-items: center;
 

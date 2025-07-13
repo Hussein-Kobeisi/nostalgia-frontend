@@ -1,0 +1,54 @@
+.capsuleCardMain{
+    height: 22dvw;
+    aspect-ratio: 3/4;
+
+    background-color: #B6A3F1;
+    border: #FFDFC7 solid .5em;
+    margin: 2em;
+    border-radius: 1.5em;
+
+    color: #222355;
+    font-family: 'Nova Mono';
+
+    font-size: 1.05dvw;
+
+    transition: transform .4s ease-out;
+}
+    .capsuleCardMain:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+.capsuleUserImage{
+    background-color: white;
+    border: #222355 solid 0.15em;
+    border-radius: 1em;
+    
+    width: 1.5em;
+    aspect-ratio: 1/1;
+    
+    margin: .2em;
+}
+
+.capsuleUsername{
+    
+}
+
+.capsuleUserDiv{
+    font-size: 150%;
+
+    width: 100%;
+    padding: .3em;
+
+
+}
+
+.capsuleNameText{
+    font-size: 200%;
+    margin-top: 25%;
+    margin-bottom: 10%;
+}
+
+.capsuleContentsDiv{
+
+}
