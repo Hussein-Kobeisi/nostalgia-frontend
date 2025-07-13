@@ -10,9 +10,6 @@ const PageHeader = () => {
     
     //dummy data
     // user = {username: "Mr. Mike", img: "https://www.gravatar.com/avatar/"}
-    // if (!user) {
-        
-    // }
 
     return(
     <div className='pageHeaderMain flex-row justify-between items-center'>
