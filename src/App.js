@@ -21,6 +21,7 @@ function App() {
                     <Route path='/publicwall' element={<PublicWall />}></Route>
                     <Route path='/userwall' element={<UserWall />}></Route>
                     <Route path='/capsule' element={<CapsulePage />}></Route>
+                    <Route path='/capsule/:id' element={<CapsulePage />}></Route>
                     <Route path='/profile' element={<UserProfile />}></Route>
               </Routes>
         </div>
@@ -29,7 +30,7 @@ function App() {
 
 function ConditionalPageHeader() {
   const location = useLocation();
-  const showHeader = ['/publicwall', '/userwall', '/capsule', '/profile'].includes(location.pathname);
+  const showHeader = ['/publicwall', '/userwall', '/capsule', '/profile'].some(base => location.pathname.startsWith(base));
 
   return (
     <>
