@@ -7,7 +7,7 @@ import UserProfile from './pages/UserProfile.jsx';
 import PageHeader from './pages/pageHeader.jsx';
 
 import './App.css';
-import {Routes, Route, useLocation } from "react-router-dom";
+import {Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
               <ConditionalPageHeader />
               <Routes>
                     <Route path='/' element={<Home />}></Route>
+                    <Route path="/home" element={<Navigate to="/" replace />} />
                     <Route path='/register' element={<Register />}></Route>
                     <Route path='/publicwall' element={<PublicWall />}></Route>
                     <Route path='/userwall' element={<UserWall />}></Route>

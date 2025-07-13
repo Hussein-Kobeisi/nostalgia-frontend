@@ -10,15 +10,18 @@
     color: #222355;
     font-family: 'Nova Mono';
 
+    font-size: 1.05dvw;
+
     transition: transform .4s ease-out;
 }
     .capsuleCardMain:hover{
         transform: scale(1.1);
+        cursor: pointer;
     }
 
 .capsuleUserImage{
     background-color: white;
-    border: #222355 solid 0.2em;
+    border: #222355 solid 0.15em;
     border-radius: 1em;
     
     width: 1.5em;
@@ -32,8 +35,20 @@
 }
 
 .capsuleUserDiv{
-    font-size: 70%;
+    font-size: 150%;
 
     width: 100%;
-    padding: 1em;
+    padding: .3em;
+
+
+}
+
+.capsuleNameText{
+    font-size: 200%;
+    margin-top: 25%;
+    margin-bottom: 10%;
+}
+
+.capsuleContentsDiv{
+
 }
