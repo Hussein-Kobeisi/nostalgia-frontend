@@ -4,7 +4,7 @@ import '../styles/common.css'
 import '../styles/PublicWall.css'
 import {CapsuleCard} from './components/capsuleCards.jsx'
 import '../classes/CapsuleData.jsx'
-import { CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
+import {CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
 
 const PublicWall = () => {
     //Axios get data + distribute by year

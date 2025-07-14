@@ -37,11 +37,20 @@ const PersonalCapsuleList = ({capsuleJsonData}) =>  {
 )}
 
 const CapsuleCreationPopup = ({setCreating}) => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [privacyState, setPrivacyState] = useState('private')
+    const [inputs, setInputs] = useState({
+        name: '',
+        openDate: new Date(),
+        privacy: 'private',
+        surprise: false,
+    });
     const navigate = useNavigate()
 
+    const handleInputChange = (field, value) => {
+        setInputs(prev => ({ ...prev, [field]: value }));
+        // setErrors(prev => ({ ...prev, [field]: '' }));
+    };
     const callCreateCapsule = () => {
+        console.log(inputs)
         //attempt to create
         //retrieve id from response
 
@@ -54,17 +63,17 @@ const CapsuleCreationPopup = ({setCreating}) => {
     return(
         <div className='creationPopupBackDrop' onClick={() => setCreating(false)}>
             <div className='flex-col creationPopupDiv' onClick={(e) => e.stopPropagation()}>
-                    <div>Capsule Name:<input className='creationPopupInput' placeholder='Eg: My Birthday Capsule'/></div>
-                    <div>Release Date:<DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='creationPopupDatePicker' /></div>
-                    <div>Privacy:   <label className='creationRadioLabel'  onClick={() => setPrivacyState('private')}>
-                                        <input type='radio' value='private' checked={privacyState == 'private'}/>
+                    <div>Capsule Name:<input className='creationPopupInput' value={inputs['name']} placeholder='Eg: My Birthday Capsule' onChange={(e) => handleInputChange('name', e.target.value)}/></div>
+                    <div>Release Date:<DatePicker selected={inputs['openDate']} onChange={(date) => handleInputChange('openDate', date)} className='creationPopupDatePicker'/></div>
+                    <div>Privacy:   <label className='creationRadioLabel'  onClick={() => handleInputChange('privacy', 'private')}>
+                                        <input type='radio' value='private' checked={inputs['privacy'] == 'private'}/>
                                     {' '}Private</label>
-                                    <label className='creationRadioLabel' onClick={() => setPrivacyState('public')}>
-                                        <input type='radio' value='public' checked={privacyState == 'public'}/>
+                                    <label className='creationRadioLabel' onClick={() => handleInputChange('privacy', 'public')}>
+                                        <input type='radio' value='public' checked={inputs['privacy'] == 'public'}/>
                                     {' '}Public</label>
                     </div>
                     <br/>
-                    <div><input type='checkbox'/> {' '}Surprise Me? </div>
+                    <div><input type='checkbox' value={inputs['surprise']} onClick={() => handleInputChange('surprise', !inputs['surprise'])}/> {' '}Surprise Me? </div>
                     <br/>
                     <div>
                         <button className='cardBtn createBtn' onClick={callCreateCapsule}>Create</button> 

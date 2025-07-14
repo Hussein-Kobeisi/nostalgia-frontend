@@ -12,7 +12,7 @@ export const CapsuleCard = ({capData}) => {
                 <img className='capsuleUserImage' src={capData.userImg} alt='capsule' />
                 <p className='capsuleUsername'>{capData.userName}</p>
             </div>
-            <p className='capsuleNameText'>{capData.capName}</p>
+            <p className='capsuleNameText'>{capData.name}</p>
             <div className='capsuleContentsDiv flex-col justify-between items-center'>
                 {capData.videoCount} videos <br/>
                 {capData.imgCount} images <br/>
@@ -29,7 +29,7 @@ export const PersonalCapsuleCard = ({capData}) => {
         <div className="capsuleCardMain capsulePersonalCardMain flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
             <div className='flex-row justify-start items-center capsuleUserDiv'>
             </div>
-            <p className='capsuleNameText'>{capData.capName}</p>
+            <p className='capsuleNameText'>{capData.name}</p>
             <div className='capsuleContentsDiv flex-col justify-between items-center'>
                 {capData.videoCount} videos <br/>
                 {capData.imgCount} images <br/>

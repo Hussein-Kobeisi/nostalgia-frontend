@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { User } from "../../classes/User";
 
 
 export const LoginCard = ({setLogin, register}) => {
@@ -140,15 +141,4 @@ function renderInputFields({ inputFields, inputs, errors, handleInputChange, isS
       {errors[field] && <p className="inputErrorMsg">{errors[field]}</p>}
     </div>
   ));
-}
-
-class User{
-    constructor(id=0, name='noName', email='noMail', mobile='0000', password='123', img=''){
-        this.id = id
-        this.username = name
-        this.email = email
-        this.mobile = mobile
-        this.password = password
-        this.img = img
-    }
 }
