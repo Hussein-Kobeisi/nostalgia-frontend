@@ -29,7 +29,7 @@ const CapsuleContentsDisplay = ({capsule, user}) => (
         {
             capsule.texts.map((text) => (<div className="capsuleTextContainer"><div className="capsuleText">{text}</div></div>))
         }
-
+    
         {(user != undefined) && (user == capsule.userId) && 
         <button className="uploadMediaButton"> + </button>}
     </div>

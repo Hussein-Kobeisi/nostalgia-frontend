@@ -80,7 +80,7 @@
     
 
     z-index: 1;
-    position: absolute;
+    position: fixed;
 
     transition: .1s ease-out;
 }

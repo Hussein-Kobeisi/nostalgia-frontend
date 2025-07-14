@@ -2,6 +2,8 @@
     height: 22dvw;
     aspect-ratio: 3/4;
 
+    text-align: center;
+
     background-color: #B6A3F1;
     border: #FFDFC7 solid .5em;
     margin: 2em;
@@ -47,4 +49,6 @@
 
 .capsulePersonalCardMain{
     margin: 0;
+    
+    text-align: center;
 }
