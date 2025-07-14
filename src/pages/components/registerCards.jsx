@@ -13,7 +13,7 @@ export const LoginCard = ({setLogin, register}) => {
 
     const [errors, setErrors] = useState({});
 
-    const handleChange = (field, value) => {
+    const handleInputChange = (field, value) => {
         setInputs(prev => ({ ...prev, [field]: value }));
         setErrors(prev => ({ ...prev, [field]: '' }));
     };
@@ -31,12 +31,12 @@ export const LoginCard = ({setLogin, register}) => {
 
     const handleSubmit = () => {
         if (validate()) {
-        console.log('Form is valid:', inputs);
-        //check if matching user in db
-        //add user to localsession
-        navigate('/publicwall');
+            //read user details from response
+            const signUser = new User(undefined, inputs['username'], undefined, undefined, inputs['password'])
+            localStorage.setItem('user', JSON.stringify(signUser))
+            navigate('/publicwall');
         } else {
-        console.log('Form has errors:', errors);
+            console.log('Form has errors:', errors);
         }
     };
     
@@ -45,7 +45,7 @@ export const LoginCard = ({setLogin, register}) => {
         <p className='cardText bold'>Login</p>
 
         <div className='flex-col items-center'>    
-           {renderInputFields({inputFields, inputs, errors, handleChange, isSignup:false})}
+           {renderInputFields({inputFields, inputs, errors, handleInputChange, isSignup:false})}
         </div>
 
         <div className='flex-col items-center'>
@@ -76,7 +76,7 @@ export const SignUpCard = ({setLogin, register}) => {
 
     const [errors, setErrors] = useState({});
 
-    const handleChange = (field, value) => {
+    const handleInputChange = (field, value) => {
         setInputs(prev => ({ ...prev, [field]: value }));
         setErrors(prev => ({ ...prev, [field]: '' }));
     };
@@ -98,12 +98,12 @@ export const SignUpCard = ({setLogin, register}) => {
 
     const handleSubmit = () => {
         if (validate()) {
-        console.log('Form is valid:', inputs);
-        //try to create user
-        //add user to localsession
-        //goto public wall
+            //read user ID from response
+            const signUser = new User(undefined, inputs['username'], inputs['email'], inputs['mobile'], inputs['password'])
+            localStorage.setItem('user', JSON.stringify(signUser))
+            navigate('/publicwall');
         } else {
-        console.log('Form has errors:', errors);
+            console.log('Form has errors:', errors);
         }
     };
 
@@ -112,7 +112,7 @@ export const SignUpCard = ({setLogin, register}) => {
         <p className='cardText bold'>Sign Up</p>
 
         <div className='flex-col items-center'>    
-           {renderInputFields({inputFields, inputs, errors, handleChange, isSignup:true })}
+           {renderInputFields({inputFields, inputs, errors, handleInputChange, isSignup:true })}
         </div>
 
         <div className='flex-col items-center'>
@@ -126,19 +126,27 @@ export const SignUpCard = ({setLogin, register}) => {
     </div>
 )}
 
-function renderInputFields({ inputFields, inputs, errors, handleChange, isSignup }) {
+function renderInputFields({ inputFields, inputs, errors, handleInputChange, isSignup }) {
   return inputFields.map((field, i) => (
     <div key={i} className="flex-col items-center">
       <input
         className={(isSignup ? 'signCardInput' : 'cardInput') + (errors[field] ? ' errorInput' : '')}
-        placeholder={
-          field[0].toUpperCase() + field.slice(1).replace('Password', ' Password')
-        }
+        placeholder={field[0].toUpperCase() + field.slice(1).replace('Password', ' Password')}
         type={field.toLowerCase().includes('password') ? 'password' : 'text'}
         value={inputs[field]}
-        onChange={e => handleChange(field, e.target.value)}
+        onChange={e => handleInputChange(field, e.target.value)}
       />
       {errors[field] && <p className="inputErrorMsg">{errors[field]}</p>}
     </div>
   ));
+}
+
+class User{
+    constructor(id=0, name='noName', email='noMail', mobile='0000', password='123'){
+        this.id = id
+        this.username = name
+        this.email = email
+        this.mobile = mobile
+        this.password = password
+    }
 }

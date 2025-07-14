@@ -3,6 +3,7 @@ import '../styles/CapsulePage.css';
 
 const CapsulePage = () => {
     const id = useParams().id;
+    
     const capsule = JSON.parse(localStorage.getItem("publicCapsuleJsonData"))
                     .find(capsule => capsule.id == id);
     let user = JSON.parse(localStorage.getItem("user"))
