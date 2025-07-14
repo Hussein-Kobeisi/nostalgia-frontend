@@ -87,3 +87,14 @@
     .uploadMediaButton:hover{
         transform: scale(1.1);
     }
+
+
+.capsuleNotFound{
+    font-size: 3dvw;
+    color: white;
+    font-family: 'Nova Mono';
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

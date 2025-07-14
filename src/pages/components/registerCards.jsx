@@ -32,7 +32,7 @@ export const LoginCard = ({setLogin, register}) => {
     const handleSubmit = () => {
         if (validate()) {
             //read user details from response
-            const signUser = new User(undefined, inputs['username'], undefined, undefined, inputs['password'])
+            const signUser = new User(undefined, inputs['username'], undefined, undefined, inputs['password'], undefined)
             localStorage.setItem('user', JSON.stringify(signUser))
             navigate('/publicwall');
         } else {
@@ -99,7 +99,7 @@ export const SignUpCard = ({setLogin, register}) => {
     const handleSubmit = () => {
         if (validate()) {
             //read user ID from response
-            const signUser = new User(undefined, inputs['username'], inputs['email'], inputs['mobile'], inputs['password'])
+            const signUser = new User(undefined, inputs['username'], inputs['email'], inputs['mobile'], inputs['password'], undefined)
             localStorage.setItem('user', JSON.stringify(signUser))
             navigate('/publicwall');
         } else {
@@ -142,11 +142,12 @@ function renderInputFields({ inputFields, inputs, errors, handleInputChange, isS
 }
 
 class User{
-    constructor(id=0, name='noName', email='noMail', mobile='0000', password='123'){
+    constructor(id=0, name='noName', email='noMail', mobile='0000', password='123', img=''){
         this.id = id
         this.username = name
         this.email = email
         this.mobile = mobile
         this.password = password
+        this.img = img
     }
 }

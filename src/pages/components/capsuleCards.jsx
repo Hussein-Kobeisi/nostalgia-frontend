@@ -21,3 +21,20 @@ export const CapsuleCard = ({capData}) => {
         </div>
     )
 }
+
+export const PersonalCapsuleCard = ({capData}) => {
+    const navigate = useNavigate()
+
+    return(
+        <div className="capsuleCardMain capsulePersonalCardMain flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
+            <div className='flex-row justify-start items-center capsuleUserDiv'>
+            </div>
+            <p className='capsuleNameText'>{capData.capName}</p>
+            <div className='capsuleContentsDiv flex-col justify-between items-center'>
+                {capData.videoCount} videos <br/>
+                {capData.imgCount} images <br/>
+                {capData.textCount} texts <br/>
+            </div>
+        </div>
+    )
+}

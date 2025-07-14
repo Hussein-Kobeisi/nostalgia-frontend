@@ -6,7 +6,7 @@ import { useState } from 'react'
 const PageHeader = () => {
     const navigate = useNavigate()
 
-    let user = JSON.parse(localStorage.getItem("user"))
+    const user = JSON.parse(localStorage.getItem("user"))
     
     //dummy data
     // user = {username: "Mr. Mike", img: "https://www.gravatar.com/avatar/"}
@@ -25,16 +25,7 @@ const PageHeader = () => {
 
 const UserButtons = ({ user }) => {
     const navigate = useNavigate()
-
-    const [selected, setSelected] = useState('');
     const [isOpen, setIsOpen] = useState(false);
-
-    const options = ['Option 1', 'Option 2'];
-
-    const handleSelect = (value) => {
-        setSelected(value);
-        setIsOpen(false);
-    };
 
     return(
     <div className='userButtonsDiv flex-row items-center'>
@@ -44,8 +35,8 @@ const UserButtons = ({ user }) => {
         </button>
         {isOpen &&
             <ul className="userDropdownMenu">
-                <li className="userDropdownItem" onClick={() => navigate('/profile')}>Profile</li>
-                <li className="userDropdownItem" onClick={() => navigate('/userwall')}>Personal Wall</li>
+                <li className="userDropdownItem" onClick={() => {navigate('/profile'); setIsOpen(false)}}>Profile</li>
+                <li className="userDropdownItem" onClick={() => {navigate('/userwall'); setIsOpen(false)}}>Personal Wall</li>
             </ul>
         }
 

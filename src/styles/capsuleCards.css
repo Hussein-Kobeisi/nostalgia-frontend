@@ -30,10 +30,6 @@
     margin: .2em;
 }
 
-.capsuleUsername{
-    
-}
-
 .capsuleUserDiv{
     font-size: 150%;
 
@@ -49,6 +45,6 @@
     margin-bottom: 10%;
 }
 
-.capsuleContentsDiv{
-
+.capsulePersonalCardMain{
+    margin: 0;
 }

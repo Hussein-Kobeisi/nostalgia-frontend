@@ -1,0 +1,12 @@
+.userWallMain{
+    color: white;
+
+    padding: 2dvw;
+    padding-top: 5em;
+    gap: 3dvw;
+
+    justify-content: start;
+
+    width: 100%;
+    overflow-x: hidden;
+}
