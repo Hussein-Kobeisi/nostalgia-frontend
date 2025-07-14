@@ -10,7 +10,6 @@ const Register = () => {
     const [isLogin, setLogin] = useState(false)
     const login = () => {console.log("login")}
     const signup = () => {console.log("signup")}
-
     
     return(
     <div className="mainPage regPage">

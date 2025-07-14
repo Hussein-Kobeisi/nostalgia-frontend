@@ -10,7 +10,7 @@ const PublicWall = () => {
     //Axios get data + distribute by year
     const jsonData = dummyData;
 
-    localStorage.setItem('capsuleJsonData', JSON.stringify(jsonData));
+    localStorage.setItem('publicCapsuleJsonData', JSON.stringify(jsonData));
 
     return(
     <div className="mainPage flex-col publicMain">

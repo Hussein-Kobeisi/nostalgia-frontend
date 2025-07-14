@@ -1,7 +1,8 @@
 export class CapsuleData {
 
-    constructor(id, userName, userImg, capName, videos, imgs, texts){
+    constructor(id, userId, userName, userImg, capName, videos, imgs, texts){
         this.id = id
+        this.userId = userId
         this.userName = userName
         this.userImg = userImg
         this.capName = capName
@@ -11,7 +12,7 @@ export class CapsuleData {
     }
 
     getDisplayData() {
-        return {"id" : this.id, 
+        return {"id" : this.id,
                 "userName" : this.userName,
                 "userImg" : this.userImg,
                 "capName" : this.capName,
@@ -25,6 +26,7 @@ export class CapsuleData {
 export const dummyData = [
   {
     "id": 1,
+    "userId": 1,
     "userName": "AliceW",
     "userImg": "https://randomuser.me/api/portraits/women/1.jpg",
     "capName": "Summer Memories",
@@ -46,6 +48,7 @@ export const dummyData = [
   },
   {
     "id": 2,
+    "userId": 2,
     "userName": "BobJ",
     "userImg": "https://randomuser.me/api/portraits/men/2.jpg",
     "capName": "Road Trip",
@@ -66,6 +69,7 @@ export const dummyData = [
   },
   {
     "id": 3,
+    "userId": 3,
     "userName": "CindyM",
     "userImg": "https://randomuser.me/api/portraits/women/3.jpg",
     "capName": "Holiday Fun",
@@ -85,6 +89,7 @@ export const dummyData = [
   },
   {
     "id": 4,
+    "userId": 4,
     "userName": "DavidP",
     "userImg": "https://randomuser.me/api/portraits/men/4.jpg",
     "capName": "Family Time",
@@ -110,6 +115,7 @@ export const dummyData = [
   },
   {
     "id": 5,
+    "userId": 5,
     "userName": "EmmaR",
     "userImg": "https://randomuser.me/api/portraits/women/5.jpg",
     "capName": "Beach Days",
@@ -125,6 +131,7 @@ export const dummyData = [
   },
   {
     "id": 6,
+    "userId": 6,
     "userName": "FrankS",
     "userImg": "https://randomuser.me/api/portraits/men/6.jpg",
     "capName": "Mountain Hikes",
@@ -154,6 +161,7 @@ export const dummyData = [
   },
   {
     "id": 7,
+    "userId": 7,
     "userName": "GraceT",
     "userImg": "https://randomuser.me/api/portraits/women/7.jpg",
     "capName": "City Life",
@@ -176,6 +184,7 @@ export const dummyData = [
   },
   {
     "id": 8,
+    "userId": 8,
     "userName": "HenryV",
     "userImg": "https://randomuser.me/api/portraits/men/8.jpg",
     "capName": "Concert Nights",
@@ -203,6 +212,7 @@ export const dummyData = [
   },
   {
     "id": 9,
+    "userId": 9,
     "userName": "IslaW",
     "userImg": "https://randomuser.me/api/portraits/women/9.jpg",
     "capName": "Winter Wonderland",
@@ -221,6 +231,7 @@ export const dummyData = [
   },
   {
     "id": 10,
+    "userId": 10,
     "userName": "JackX",
     "userImg": "https://randomuser.me/api/portraits/men/10.jpg",
     "capName": "Food Adventures",
@@ -249,6 +260,6 @@ export const dummyData = [
 
 export function CapsuleListFromJson(data) {
     return data.map(
-        item => new CapsuleData(item.id, item.userName, item.userImg, item.capName, item.videos, item.imgs, item.texts)
+        item => new CapsuleData(item.id, item.userId, item.userName, item.userImg, item.capName, item.videos, item.imgs, item.texts)
     )
 }
