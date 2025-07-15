@@ -8,7 +8,7 @@ export class CapsuleData {
 
         //User displayed data
         this.userId = user.id
-        this.userName = user.username
+        this.userName = user.names
         this.userImg = user.img
         
         

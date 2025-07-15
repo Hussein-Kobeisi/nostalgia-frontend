@@ -9,7 +9,7 @@ const PageHeader = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     
     //dummy data
-    // user = {username: "Mr. Mike", img: "https://www.gravatar.com/avatar/"}
+    // user = {name: "Mr. Mike", img: "https://www.gravatar.com/avatar/"}
 
     return(
     <div className='pageHeaderMain flex-row justify-between items-center'>
@@ -30,8 +30,8 @@ const UserButtons = ({ user }) => {
     return(
     <div className='userButtonsDiv flex-row items-center'>
         <button className='flex-row items-center' onClick={() => setIsOpen(!isOpen)}>
-            <p>{user.username}</p>
-            <img className='userImg' src={user.img}/>           
+            <p>{user.name}</p>
+            <img className='userImg' src={(user.img != '') ? user.img : null}/>           
         </button>
         {isOpen &&
             <ul className="userDropdownMenu">

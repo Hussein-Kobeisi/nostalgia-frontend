@@ -55,14 +55,14 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
         const newErrors = {};
 
         if (!inputs.name.trim()) newErrors.name = '*Capsule Name is required';
-        if (inputs.openDate < new Date()) newErrors.openDate = 'Date must be in future!';
+        if (inputs.openDate < new Date()) newErrors.openDate = '*Date must be in future!';
 
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
     }
 
-    const callCreateCapsule = () => {
+    const callCreateCapsuleRequest = () => {
         if(validate()){
             console.log(inputs)
             const capSettings = new CapsuleSettings(inputs.name, inputs.openDate, inputs.privacy, inputs.surprise)
@@ -111,7 +111,7 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
                     <br/>
                     
                     <div>
-                        <button className='cardBtn createBtn' onClick={callCreateCapsule}>Create</button> 
+                        <button className='cardBtn createBtn' onClick={callCreateCapsuleRequest}>Create</button> 
                         <button className='cardBtn createBtn' onClick={() => setCreating(false)}>Cancel</button>
                     </div>
             </div>
