@@ -62,7 +62,6 @@ export const LoginCard = ({setLogin, register}) => {
     </div>
 )}
 
-
 export const SignUpCard = ({setLogin, register}) => {
     const navigate = useNavigate();
     
