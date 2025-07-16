@@ -52,6 +52,7 @@
 }
     .userDropdownItem:hover{
         background-color: #8f7fc2;
+        cursor: pointer;
     }
 
 .guestHeaderButton{

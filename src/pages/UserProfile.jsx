@@ -1,4 +1,5 @@
 import '../styles/UserProfile.css'
+import {Popup} from './components/popup'
 import { useState } from 'react'
 
 const UserProfile = () => {
@@ -7,6 +8,8 @@ const UserProfile = () => {
     const inputFields = ['name', 'email', 'mobile', 'password', 'confirm']
     const [userState, setUserState] = useState({...user, confirm:user.password})
     const [errors, setErrors] = useState({})
+
+    const [visibleSuccessPopup, setVisibleSuccessPopup] = useState(false)
 
     const handleInputChange = (field, value) => {
         setUserState(prev => ({ ...prev, [field]: value }));
@@ -19,7 +22,7 @@ const UserProfile = () => {
         if (!userState.name.trim()) newErrors.name = '*User Name is required';
         if (!userState.email.includes('@')) newErrors.email = '*Email should be a valid domain';
         if (!userState.mobile.match(/^\d{10}$/)) newErrors.mobile = '*Mobile should be a 10-digit numebr';
-        if (!userState.password.length < 6) newErrors.password = '*Password should be at least 6 characters';
+        if (userState.password.length < 6) newErrors.password = '*Password should be at least 6 characters';
         if (userState.confirm != userState.password) newErrors.confirm = "*Passwords don't match";
 
         setErrors(newErrors);
@@ -35,6 +38,8 @@ const UserProfile = () => {
             user.password = userState.password
 
             localStorage.setItem('user', JSON.stringify(user))
+
+            setVisibleSuccessPopup(true)
         }
     }
 
@@ -45,6 +50,7 @@ const UserProfile = () => {
 
             <UserInputFields inputFields={inputFields} userState={userState} errors={errors} handleInputChange={handleInputChange}/>
             <button className='cardBtn createBtn' onClick={handleSubmit}>Save Changes</button>
+            <Popup visible={visibleSuccessPopup} setVisible={setVisibleSuccessPopup}/>
         </div>
         
     </div>

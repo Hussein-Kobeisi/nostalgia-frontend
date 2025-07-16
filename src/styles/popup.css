@@ -1,0 +1,15 @@
+.popupDiv{
+    z-index: 10;
+    position: absolute;
+    color: white;
+    background-color: rgb(28, 183, 95);
+    text-align: center;
+    padding: 1em 2em;
+    border-radius: 1em;
+    opacity: 1; 
+}
+.fade-out {
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    pointer-events: none;
+}
