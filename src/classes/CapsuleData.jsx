@@ -44,8 +44,9 @@ export class CapsuleMedia{
 }
 
 export class CapsuleSettings{
-    constructor(name='', openDate=new Date(), privacy='private', surprise=false){
+    constructor(name='', createDate=new Date(), openDate=new Date(), privacy='private', surprise=false){
         this.name = name
+        this.createDate = createDate
         this.openDate = openDate
         this.privacy = privacy
         this.surprise = surprise

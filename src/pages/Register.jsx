@@ -2,12 +2,15 @@ import '../styles/Register.css'
 import '../styles/common.css'
 import { useState } from 'react';
 import {LoginCard, SignUpCard} from './components/registerCards.jsx'
-
+import { useSearchParams } from 'react-router-dom';
 
 
 
 const Register = () => { 
-    const [isLogin, setLogin] = useState(false)
+    const [searchParams] = useSearchParams();
+    const loginParam = (searchParams.get("login") == "true");
+
+    const [isLogin, setLogin] = useState(loginParam)
     const login = () => {console.log("login")}
     const signup = () => {console.log("signup")}
     

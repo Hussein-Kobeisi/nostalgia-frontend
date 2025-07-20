@@ -110,7 +110,7 @@
     font-size: 1.1dvw;
 }
 
-.inputErrorMsg{
+.inputUserErrorMsg{
     color: red;
     font-size: .7em;
     padding: 0;

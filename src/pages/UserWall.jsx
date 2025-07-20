@@ -93,10 +93,10 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
         <div className='creationPopupBackDrop' onClick={() => setCreating(false)}>
             <div className='flex-col creationPopupDiv' onClick={(e) => e.stopPropagation()}>
                     <div>Capsule Name:<input className='creationPopupInput' value={inputs.name} placeholder='Eg: My Birthday Capsule' onChange={(e) => handleInputChange('name', e.target.value)}/></div>
-                    {errors.name && <p className="inputErrorMsg">{errors.name}</p>}
+                    {errors.name && <p className="inputUserErrorMsg">{errors.name}</p>}
                     
                     <div>Release Date:<DatePicker selected={inputs.openDate} onChange={(date) => handleInputChange('openDate', date)} className='creationPopupDatePicker'/></div>
-                    {errors.openDate && <p className="inputErrorMsg">{errors.openDate}</p>}
+                    {errors.openDate && <p className="inputUserErrorMsg">{errors.openDate}</p>}
 
                     <div>Privacy:   <label className='creationRadioLabel'  onClick={() => handleInputChange('privacy', 'private')}>
                                         <input type='radio' value='private' checked={inputs.privacy == 'private'}/>

@@ -7,7 +7,11 @@ import '../classes/CapsuleData.jsx'
 import {CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
 
 const PublicWall = () => {
-    //Axios get data + distribute by year
+    
+    axios.get(getPublicCapsulesApi)
+    .then(respone => {
+        console.log(respone)
+    })
     const jsonData = dummyData;
 
     localStorage.setItem('publicCapsuleJsonData', JSON.stringify(jsonData));
