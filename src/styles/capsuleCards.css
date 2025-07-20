@@ -1,6 +1,9 @@
 .capsuleCardMain{
+    flex-shrink: 0;
+    flex-grow: 0;
+
     height: 22dvw;
-    aspect-ratio: 3/4;
+    width: 17dvw;
 
     text-align: center;
 
@@ -37,14 +40,19 @@
 
     width: 100%;
     padding: .3em;
-
-
 }
 
 .capsuleNameText{
-    font-size: 200%;
+    font-size: 2dvw;
+    width: 100%;
+    height: auto;
+
     margin-top: 25%;
     margin-bottom: 10%;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Ensure it wraps */
 }
 
 .capsulePersonalCardMain{

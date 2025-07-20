@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { User } from "../../classes/User";
 import axios from 'axios';
 import * as API from '../../apis/apis'
-import '../../styles/Register.css'
 import ClipLoader from "react-spinners/ClipLoader";
 
 export const LoginCard = ({setLogin, register}) => {

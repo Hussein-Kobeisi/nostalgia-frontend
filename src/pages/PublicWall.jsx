@@ -5,16 +5,45 @@ import '../styles/PublicWall.css'
 import {CapsuleCard} from './components/capsuleCards.jsx'
 import '../classes/CapsuleData.jsx'
 import {CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
+import axios from 'axios';
+import * as API from '../apis/apis'
+import ClipLoader from "react-spinners/ClipLoader";
 
-const PublicWall = () => {
+const PublicWall = () => {    
+    const [capsulesReady, setCapsulesReady] = useState(false)
+    const [usersReady, setUsersReady] = useState(false)
+    const [capsData, setCapData] = useState()
     
-    axios.get(getPublicCapsulesApi)
-    .then(respone => {
-        console.log(respone)
-    })
-    const jsonData = dummyData;
+    useEffect(() => callGetCapsules(), []);
 
-    localStorage.setItem('publicCapsuleJsonData', JSON.stringify(jsonData));
+    function callGetCapsules() {
+        axios.get(API.getPublicCapsulesApi)
+        .then(respone => {
+            localStorage.setItem('publicCapsuleJsonData', JSON.stringify(capsData));
+            setCapsulesReady(true)
+            callGetUsers(respone.data.payload)
+        })
+    }
+
+    function callGetUsers(capsules) {
+        axios.get(API.getUsersApi)
+        .then(respone => {
+            let usersData = respone.data.payload
+            localStorage.setItem('users', JSON.stringify(usersData));
+
+            //add users to their capsules
+            setCapData(capsules.map(cap => {
+                const user = usersData.find(user => user.id === cap.user_id) || null;
+                return {...cap, 
+                        user: user};
+            }))
+
+            setUsersReady(true)
+        })
+    }
+
+    if(!(capsulesReady && usersReady))
+        return(<div className="mainPage flex-col publicMain">Loading...</div>)
 
     return(
     <div className="mainPage flex-col publicMain">
@@ -26,21 +55,21 @@ const PublicWall = () => {
         <div className='publicYearDiv flex-col items-center'>
             2020s
         </div>
-        <CapsuleList capsuleJsonData={jsonData} />
+        <CapsuleList capsData={capsData}/>
         
         <div className='publicYearDiv flex-col items-center'>
             2015s
         </div>
-        <CapsuleList capsuleJsonData={jsonData}/>
+        <CapsuleList capsData={capsData}/>
 
         <div className='publicYearDiv flex-col items-center'>
             2010s
         </div>
-        <CapsuleList capsuleJsonData={jsonData}/>
+        <CapsuleList capsData={capsData}/>
     </div>
 )}
 
-const CapsuleList = ({capsuleJsonData}) =>  {
+const CapsuleList = ({capsData}) =>  {
 
     const scrollRef = useRef(null)
     const scrollAmount = window.innerWidth * 0.9;
@@ -77,7 +106,6 @@ const CapsuleList = ({capsuleJsonData}) =>  {
 
     //map data from json
     //getDisplayData() give media counts instead of arrays
-    const capslist = CapsuleListFromJson(capsuleJsonData).map(item => item.getDisplayData())
 
     return(
     <div className='capsuleListDiv'>
@@ -87,7 +115,7 @@ const CapsuleList = ({capsuleJsonData}) =>  {
         
         <div className='publicDisplayRow  flex-row' ref={scrollRef}>
             {
-                capslist.map( item => (<CapsuleCard key={item.id} capData={item} />))
+                capsData.map( item => (<CapsuleCard key={item.id} capData={item} />))
             }
         </div>
 
