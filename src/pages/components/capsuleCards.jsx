@@ -17,9 +17,6 @@ export const CapsuleCard = ({capData}) => {
             setUser(prev => ({...prev, name: capData.user.name ?? ''}));
             setUser(prev => ({...prev, img: capData.user.img ?? ''}));
         }
-        if(capData.id == 1){
-            console.log(capData);
-        }
     }
     , []);
 

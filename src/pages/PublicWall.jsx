@@ -10,39 +10,20 @@ import * as API from '../apis/apis'
 import ClipLoader from "react-spinners/ClipLoader";
 
 const PublicWall = () => {    
-    const [capsulesReady, setCapsulesReady] = useState(false)
-    const [usersReady, setUsersReady] = useState(false)
+    const didMountGroup = useRef(false);
+    const didMountInterval = useRef(false);
+    const [ready, setReady] = useState(false)
     const [capsData, setCapData] = useState()
+    const [groups, setGroups] = useState()
+    const [intervals, setIntervals] = useState([])
     
-    useEffect(() => callGetCapsules(), []);
+    useEffect(() => callGetCapsules(setCapData), []);
+    useEffect(() => trySettingGroups(didMountGroup, setGroups, capsData), [capsData]);
+    useEffect(() => trySettingIntervals(didMountInterval, setIntervals, groups), [groups]);
+    useEffect(() => setReady(intervals != []), [intervals]);
 
-    function callGetCapsules() {
-        axios.get(API.getPublicCapsulesApi)
-        .then(respone => {
-            localStorage.setItem('publicCapsuleJsonData', JSON.stringify(capsData));
-            setCapsulesReady(true)
-            callGetUsers(respone.data.payload)
-        })
-    }
 
-    function callGetUsers(capsules) {
-        axios.get(API.getUsersApi)
-        .then(respone => {
-            let usersData = respone.data.payload
-            localStorage.setItem('users', JSON.stringify(usersData));
-
-            //add users to their capsules
-            setCapData(capsules.map(cap => {
-                const user = usersData.find(user => user.id === cap.user_id) || null;
-                return {...cap, 
-                        user: user};
-            }))
-
-            setUsersReady(true)
-        })
-    }
-
-    if(!(capsulesReady && usersReady))
+    if(!ready)
         return(<div className="mainPage flex-col publicMain">Loading...</div>)
 
     return(
@@ -52,7 +33,15 @@ const PublicWall = () => {
             <div className='smallPublicText'>Dig deep and explore!</div>
         </div>
 
-        <div className='publicYearDiv flex-col items-center'>
+        {intervals.map(interval => (
+            <div key={interval}>
+                <div className="publicYearDiv flex-col items-center">
+                    {interval}s
+                </div>
+                <CapsuleList capsData={groups[interval]} />
+            </div>
+        ))}
+        {/* <div className='publicYearDiv flex-col items-center'>
             2020s
         </div>
         <CapsuleList capsData={capsData}/>
@@ -65,7 +54,7 @@ const PublicWall = () => {
         <div className='publicYearDiv flex-col items-center'>
             2010s
         </div>
-        <CapsuleList capsData={capsData}/>
+        <CapsuleList capsData={capsData}/> */}
     </div>
 )}
 
@@ -122,6 +111,63 @@ const CapsuleList = ({capsData}) =>  {
     </div>
 )}
 
+
+
+//functions
+function callGetCapsules(setCapData) {
+    axios.get(API.getPublicCapsulesApi)
+    .then(respone => {
+        localStorage.setItem('publicCapsules', JSON.stringify(respone.data.payload));
+        callGetUsers(respone.data.payload, setCapData)
+    })
+}
+
+function callGetUsers(capsules, setCapData) {
+    axios.get(API.getUsersApi)
+    .then(respone => {
+        let usersData = respone.data.payload
+        localStorage.setItem('users', JSON.stringify(usersData));
+
+        //add users to their capsules
+        setCapData(capsules.map(cap => {
+            const user = usersData.find(user => user.id === cap.user_id) || null;
+            return {...cap, 
+                    user: user};
+        }))
+    })
+}
+
+function trySettingGroups(didMount, setGroups, capsData)
+{
+    if (didMount.current)
+        setGroups(groupCapsByInterval(capsData));
+    else
+        didMount.current = true;
+}
+
+function groupCapsByInterval(capsData){
+    const groups = {};
+
+    capsData.forEach(cap => {
+        const year = new Date(cap.open_date).getFullYear();
+        const interval = Math.floor(year / 5) * 5;
+
+        if (!groups[interval]) {
+        groups[interval] = [];
+        }
+        groups[interval].push(cap);
+    });
+
+    return groups;
+};
+
+function trySettingIntervals(didMount, setIntervals, groups)
+{
+    if (didMount.current)
+        setIntervals(Object.keys(groups).map(Number).sort((a, b) => b - a))
+    else
+        didMount.current = true;
+}
 
 
 export default PublicWall;
