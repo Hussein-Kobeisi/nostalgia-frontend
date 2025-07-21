@@ -1,32 +1,36 @@
 import '../../styles/capsuleCards.css'
 import {useNavigate} from 'react-router-dom'
+import {useEffect, useState} from 'react';
 import * as API from '../../apis/apis'
 
 
 export const CapsuleCard = ({capData}) => {
     const navigate = useNavigate()
-    capData['userImg'] = ''
-    capData['user_name'] = ''
+    const [user, setUser] = useState({
+        img: '',
+        name: ''
+    });
 
-    if(capData.user){
-        
-        capData['userImg'] = capData.user.img ?? ''
-        capData['user_name'] = capData.user.name ?? ''
-        console.log(API.mainRoute+capData['userImg'])
+    //only on load: handle user data (in case user not found)
+    useEffect(() => {
+        if(capData.user){
+            setUser(prev => ({...prev, name: capData.user.name ?? ''}));
+            setUser(prev => ({...prev, img: capData.user.img ?? ''}));
+        }
+        if(capData.id == 1){
+            console.log(capData);
+        }
     }
+    , []);
 
     return(
         <div className="capsuleCardMain flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
             <div className='flex-row justify-start items-center capsuleUserDiv'>
-                <img className='capsuleUserImage' src={API.mainRoute+capData['userImg']} alt='capsule' />
-                <p className='capsuleUsername'>{capData.user_name}</p>
+                <img className='capsuleUserImage' src={API.mainRoute+user.img} alt='capsule' />
+                <p className='capsuleUsername'>{user.name}</p>
             </div>
             <p className='capsuleNameText'>{capData.name}</p>
-            {/* <div className='capsuleContentsDiv flex-col justify-between items-center'>
-                {capData.videoCount} videos <br/>
-                {capData.imgCount} images <br/>
-                {capData.textCount} texts <br/>
-            </div> */}
+            <p className='capsuleDateText'>{'Opened at:' + capData.open_date}</p>
         </div>
     )
 }
@@ -39,11 +43,6 @@ export const PersonalCapsuleCard = ({capData}) => {
             <div className='flex-row justify-start items-center capsuleUserDiv'>
             </div>
             <p className='capsuleNameText'>{capData.name}</p>
-            <div className='capsuleContentsDiv flex-col justify-between items-center'>
-                {capData.videoCount} videos <br/>
-                {capData.imgCount} images <br/>
-                {capData.textCount} texts <br/>
-            </div>
         </div>
     )
 }

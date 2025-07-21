@@ -23,6 +23,13 @@
         transform: scale(1.1);
         cursor: pointer;
     }
+.capsuleUsername{
+    margin-right: auto;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
 
 .capsuleUserImage{
     background-color: white;
@@ -59,4 +66,10 @@
     margin: 0;
     
     text-align: center;
+}
+
+.capsuleDateText{
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 2em;
 }
