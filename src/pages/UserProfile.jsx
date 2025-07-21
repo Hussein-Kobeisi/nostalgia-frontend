@@ -3,9 +3,10 @@ import {Popup} from './components/popup'
 import { useState } from 'react'
 import * as API from '../apis/apis'
 import axios from 'axios';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const UserProfile = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
+    let user = JSON.parse(localStorage.getItem('user'))
 
     const inputFields = ['name', 'email', 'mobile', 'password', 'confirm']
     const [userState, setUserState] = useState({
@@ -19,6 +20,7 @@ const UserProfile = () => {
 
     const [visibleSuccessPopup, setVisibleSuccessPopup] = useState(false)
     const [visibleFailedPopup, setVisibleFailedPopup] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (field, value) => {
         setUserState(prev => ({ ...prev, [field]: value }));
@@ -41,6 +43,9 @@ const UserProfile = () => {
 
     const handleSubmit = () => {
         if(validate()){
+            
+            setLoading(true)
+
             axios.post(API.updateUserApi, {
                 id: user.id,
                 name: userState.name,
@@ -55,12 +60,15 @@ const UserProfile = () => {
                 }
             })
             .then(response => {
-                console.log(response)
+                setLoading(false)
+                user = response.data.payload
+                localStorage.setItem('user', JSON.stringify(user))
                 setVisibleSuccessPopup(true)
             })
-            .catch(() => 
+            .catch(() => {
+                setLoading(false)
                 setVisibleFailedPopup(true)
-            )          
+            })          
         }
     }
 
@@ -73,6 +81,9 @@ const UserProfile = () => {
             <button className='cardBtn createBtn' onClick={handleSubmit}>Save Changes</button>
             <Popup visible={visibleSuccessPopup} setVisible={setVisibleSuccessPopup}/>
             <Popup visible={visibleFailedPopup} setVisible={setVisibleFailedPopup} msg='Try Again!' addClass='fail'/>
+            {loading && <div className='loaderDiv'>
+                <ClipLoader loading={loading} size={35} />
+            </div>}
         </div>
         
     </div>
