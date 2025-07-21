@@ -41,23 +41,10 @@ const PublicWall = () => {
                 <CapsuleList capsData={groups[interval]} />
             </div>
         ))}
-        {/* <div className='publicYearDiv flex-col items-center'>
-            2020s
-        </div>
-        <CapsuleList capsData={capsData}/>
-        
-        <div className='publicYearDiv flex-col items-center'>
-            2015s
-        </div>
-        <CapsuleList capsData={capsData}/>
-
-        <div className='publicYearDiv flex-col items-center'>
-            2010s
-        </div>
-        <CapsuleList capsData={capsData}/> */}
     </div>
 )}
 
+//components
 const CapsuleList = ({capsData}) =>  {
 
     const scrollRef = useRef(null)
@@ -110,8 +97,6 @@ const CapsuleList = ({capsData}) =>  {
 
     </div>
 )}
-
-
 
 //functions
 function callGetCapsules(setCapData) {

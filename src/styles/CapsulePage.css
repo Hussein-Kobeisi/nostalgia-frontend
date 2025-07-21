@@ -2,10 +2,9 @@
     color: white;
     padding: 2em;
     padding-top: 5em;
-    gap: 2em;
-    
+    gap: 5em;
 
-    justify-content: start;
+    justify-content: center;
 }
 
 .capsuleImage{
@@ -97,4 +96,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.capsuleTextContainer{    
+    font-size: 1.3dvw;
+    min-height: 20dvw;
+    width: 20dvw;
+    aspect-ratio: 2/1;
+    border-radius: 1em;
+
+    padding: 1em;
+
+    border: .3em solid #FFE7D5;
+
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+
+    transition: .4s ease-out;
+}
+    .capsuleTextContainer:hover{
+        aspect-ratio: auto;
+        background-color: #B6A3F1;
+        
+        flex-grow: 1;
+        transform: scale(1.1);
+    }
+
+.capsulePageMainMain{
+    display: flex;
+    padding-top: 5em;
+    flex-direction: column;
+}
+
+.capsulePageTitle{
+    font-size: 3dvw;
 }
