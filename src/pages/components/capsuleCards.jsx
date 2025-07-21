@@ -7,7 +7,7 @@ import * as API from '../../apis/apis'
 export const CapsuleCard = ({capData}) => {
     const navigate = useNavigate()
     const [user, setUser] = useState({
-        img: '',
+        img: '/storage/uploads/p13.png',
         name: ''
     });
 
@@ -15,7 +15,7 @@ export const CapsuleCard = ({capData}) => {
     useEffect(() => {
         if(capData.user){
             setUser(prev => ({...prev, name: capData.user.name ?? ''}));
-            setUser(prev => ({...prev, img: capData.user.img ?? ''}));
+            // setUser(prev => ({...prev, img: capData.user.img ?? ''}));
         }
     }
     , []);

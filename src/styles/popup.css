@@ -2,7 +2,7 @@
     z-index: 10;
     position: absolute;
     color: white;
-    background-color: rgb(28, 183, 95);
+    background-color: #1cb75f;
     text-align: center;
     padding: 1em 2em;
     border-radius: 1em;
@@ -12,4 +12,8 @@
     transition: opacity 1s ease-out;
     opacity: 0;
     pointer-events: none;
+}
+
+.fail{
+    background-color: #b71c38;
 }

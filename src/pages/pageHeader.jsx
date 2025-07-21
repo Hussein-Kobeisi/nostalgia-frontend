@@ -7,14 +7,14 @@ const PageHeader = () => {
     const navigate = useNavigate()
 
     const user = JSON.parse(localStorage.getItem("user"))
-    
-    //dummy data
-    // user = {name: "Mr. Mike", img: "https://www.gravatar.com/avatar/"}
 
     return(
     <div className='pageHeaderMain flex-row justify-between items-center'>
-        <button onClick={() => navigate('/home')}>Nostalgia</button>
-        
+        <div className='headerLeft'>
+            <button onClick={() => navigate('/home')}>Nostalgia</button>
+            {' | '}
+            <button onClick={() => navigate('/publicwall')}>Public</button>
+        </div>
         {(!user) ? <GuestButtons /> : <UserButtons user={user} />}
         
         <div className='pageRegisterButtonsDiv' style={{display: 'none'}}>

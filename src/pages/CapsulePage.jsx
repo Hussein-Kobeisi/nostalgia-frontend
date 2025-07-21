@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as API from '../apis/apis'
 import '../styles/CapsulePage.css';
 import '../styles/common.css';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const CapsulePage = () => {
     const didMount = useRef(false);

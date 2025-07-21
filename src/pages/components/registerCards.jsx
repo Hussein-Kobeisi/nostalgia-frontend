@@ -51,7 +51,8 @@ export const LoginCard = ({setLogin, register}) => {
             password: password
         })
         .then(response => {
-            saveUserAndToken(response.data.user, response.data.token)
+            console.log(response)
+            saveUserAndToken(response.data.user, response.data.authorisation.token)
             setLoading(false)
             navigate('/publicwall');
         })
@@ -144,7 +145,7 @@ export const SignUpCard = ({setLogin, register}) => {
             password: password
         })
         .then(response => {
-            saveUserAndToken(response.data.user, response.data.token)
+            saveUserAndToken(response.data.user, response.data.authorisation.token)
             navigate('/publicwall');
             setLoading(false)
         })

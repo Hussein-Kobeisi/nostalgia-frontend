@@ -20,7 +20,7 @@ export const deleteUserCapsulesByIdApi = mainApiRoute + '/delete_capsule/user'  
 export const getMediaByIdApi = mainApiRoute + '/capsule_media/id/'                    //Get
 export const getMediaByCapsuleIdApi = mainApiRoute + '/capsule_media/capsule/'        //Get
 
-export const addOrUpdateMediaApi = mainApiRoute + '/addOrUpdate'                            //POST + jwt
+export const addOrUpdateMediaApi = mainApiRoute + '/add_update_capsule_media/'              //POST + jwt
 export const deleteMediaByIdApi = mainApiRoute + '/delete_capsule_media/'                   //POST + jwt
 export const deleteMediaByCapsuleIdApi = mainApiRoute + '/delete_capsule_media/capsule/'    //POST + jwt
 
