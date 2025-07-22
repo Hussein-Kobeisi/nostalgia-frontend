@@ -16,11 +16,12 @@ const PublicWall = () => {
     const [capsData, setCapData] = useState()
     const [groups, setGroups] = useState()
     const [intervals, setIntervals] = useState([])
+    const [loading, setLoading] = useState(false);
     
-    useEffect(() => callGetCapsules(setCapData), []);
+    useEffect(() => {callGetCapsules(setCapData); setLoading(true);}, []);
     useEffect(() => trySettingGroups(didMountGroup, setGroups, capsData), [capsData]);
     useEffect(() => trySettingIntervals(didMountInterval, setIntervals, groups), [groups]);
-    useEffect(() => setReady(intervals != []), [intervals]);
+    useEffect(() => {setReady(intervals.length); setLoading(!(intervals.length)); console.log('setting Ready..' + (intervals.length))}, [intervals]);
 
 
     if(!ready)
@@ -28,6 +29,7 @@ const PublicWall = () => {
 
     return(
     <div className="mainPage flex-col publicMain">
+        {loading && <div className='loaderDiv'><ClipLoader loading={loading} size={35} /></div>}
         <div className='publicTextDiv flex-col items-center'>
             <div className='bigPublicText'>Moments Shared by Others</div>
             <div className='smallPublicText'>Dig deep and explore!</div>
@@ -100,16 +102,20 @@ const CapsuleList = ({capsData}) =>  {
 
 //functions
 function callGetCapsules(setCapData) {
+    console.log('getting Capsules..')
     axios.get(API.getPublicCapsulesApi)
     .then(respone => {
+        console.log(respone)
         localStorage.setItem('publicCapsules', JSON.stringify(respone.data.payload));
         callGetUsers(respone.data.payload, setCapData)
     })
 }
 
 function callGetUsers(capsules, setCapData) {
+    console.log('getting Users..')
     axios.get(API.getUsersApi)
     .then(respone => {
+        console.log(respone)
         let usersData = respone.data.payload
         localStorage.setItem('users', JSON.stringify(usersData));
 
@@ -124,9 +130,10 @@ function callGetUsers(capsules, setCapData) {
 
 function trySettingGroups(didMount, setGroups, capsData)
 {
-    if (didMount.current)
+    if (didMount.current){
+        console.log('setting Groups..')
         setGroups(groupCapsByInterval(capsData));
-    else
+    }else
         didMount.current = true;
 }
 
@@ -148,9 +155,10 @@ function groupCapsByInterval(capsData){
 
 function trySettingIntervals(didMount, setIntervals, groups)
 {
-    if (didMount.current)
+    if (didMount.current){
+        console.log('setting Intervals..')
         setIntervals(Object.keys(groups).map(Number).sort((a, b) => b - a))
-    else
+    }else
         didMount.current = true;
 }
 
