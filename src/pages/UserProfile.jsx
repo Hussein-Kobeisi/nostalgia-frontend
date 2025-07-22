@@ -81,9 +81,7 @@ const UserProfile = () => {
             <button className='cardBtn createBtn' onClick={handleSubmit}>Save Changes</button>
             <Popup visible={visibleSuccessPopup} setVisible={setVisibleSuccessPopup}/>
             <Popup visible={visibleFailedPopup} setVisible={setVisibleFailedPopup} msg='Try Again!' addClass='fail'/>
-            {loading && <div className='loaderDiv'>
-                <ClipLoader loading={loading} size={35} />
-            </div>}
+            {loading && <div className='loaderDiv'><ClipLoader loading={loading} size={35} /></div>}
         </div>
         
     </div>

@@ -3,19 +3,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export class CapsuleData {
 
-    constructor(id=-1, user=new User(), media=new CapsuleMedia(), settings=new CapsuleSettings()){
+    constructor(id=-1, user=new User(), settings=new CapsuleSettings()){
         this.id = id
 
         //User displayed data
         this.userId = user.id
         this.userName = user.names
         this.userImg = user.img
-        
-        
-        //Capsule media
-        this.videos = media.videos
-        this.imgs = media.imgs
-        this.texts = media.texts
 
         //Capsule settings
         this.name = settings.name
@@ -32,14 +26,6 @@ export class CapsuleData {
                 "videoCount" : this.videos.length,
                 "imgCount" : this.imgs.length,
                 "textCount" : this.texts.length}
-    }
-}
-
-export class CapsuleMedia{
-    constructor(videos=[], imgs=[], texts=[]){
-        this.videos = videos
-        this.imgs = imgs
-        this.texts = texts
     }
 }
 
@@ -292,7 +278,6 @@ export function CapsuleListFromJson(data) {
     return data.map(
         item => new CapsuleData(item.id, 
                                 new User(item.userId, item.userName, undefined, undefined, undefined, item.userImg),
-                                new CapsuleMedia(item.videos, item.imgs, item.texts),
                                 new CapsuleSettings(item.capName))
     )
 }

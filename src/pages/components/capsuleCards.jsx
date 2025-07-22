@@ -40,6 +40,7 @@ export const PersonalCapsuleCard = ({capData}) => {
             <div className='flex-row justify-start items-center capsuleUserDiv'>
             </div>
             <p className='capsuleNameText'>{capData.name}</p>
+            <p className='capsuleDateText'>{'Opened at:' + capData.open_date}</p>
         </div>
     )
 }

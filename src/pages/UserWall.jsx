@@ -1,39 +1,50 @@
 import {PersonalCapsuleCard} from './components/capsuleCards.jsx'
 import '../styles/common.css'
 import '../styles/UserWall.css'
-import { CapsuleData, CapsuleMedia, CapsuleSettings, CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
+import { CapsuleData, CapsuleSettings, CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
 import '../classes/CapsuleData.jsx'
-import { useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
+import * as API from '../apis/apis'
+import axios from 'axios';
 
 
 const UserWall = () => {
+    const didMount = useRef(false);
     const user = JSON.parse(localStorage.getItem("user"))
     const [creating, setCreating] = useState(false)
-    
+    const [caps, setCaps] = useState()
+    const [ready, setReady] = useState(false)
     const jsonData = dummyData;
+
+    useEffect(() => {callGetUserCapsules(setCaps)}, []);
+    useEffect(() => trySetReady(didMount, setReady), [caps])
 
     return(
     <div className="mainPage userWallMain">
-        <PersonalCapsuleList capsuleJsonData={jsonData}/>
+        {ready && <PersonalCapsuleList capsuleJsonData={caps}/>}
         <button className="newCapsuleButton" onClick={() => setCreating(true)}> Create New </button>
         {creating && <CapsuleCreationPopup setCreating={setCreating} user={user}/>}
+        {!ready && <div className='loaderDiv'><ClipLoader loading={!ready} size={35} /></div>}
     </div>
 )}
 
+//components
 const PersonalCapsuleList = ({capsuleJsonData}) =>  {
 
-    const capslist = CapsuleListFromJson(capsuleJsonData).map(item => item.getDisplayData())
-    // capslist.map( item => console.log(item.getDisplayData()))
+    capsuleJsonData = capsuleJsonData.sort((a, b) => {
+        return new Date(b.open_date) - new Date(a.open_date);
+    });
 
     return(
-    <div className="flex-row wrap items-start personalCapsuleDiv">
+    <>
             {
-                capslist.map( item => (<PersonalCapsuleCard key={item.id} capData={item}/>))
+                capsuleJsonData.map( item => (<PersonalCapsuleCard key={item.id} capData={item}/>))
             }
-    </div>
+    </>
 )}
 
 const CapsuleCreationPopup = ({setCreating, user}) => {
@@ -64,18 +75,34 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
 
     const callCreateCapsuleRequest = () => {
         if(validate()){
-            console.log(inputs)
-            const capSettings = new CapsuleSettings(inputs.name, inputs.openDate, inputs.privacy, inputs.surprise)
-            const capsuleData = new CapsuleData(undefined, user, undefined, capSettings)
-            
+            const capSettings = new CapsuleSettings(inputs.name, new Date(), inputs.openDate, inputs.privacy, inputs.surprise)
+            const capsuleData = new CapsuleData(undefined, user, capSettings)
+            const token = JSON.parse(localStorage.getItem('token'))
+
+            axios.post(API.addOrUpdateCapsuleApi, {
+                user_id: user.id,
+                name: capsuleData.name,
+                create_date: (new Date()).toISOString().slice(0, 19).replace('T', ' '),
+                open_date: capsuleData.openDate.toISOString().slice(0, 19).replace('T', ' '),
+                privacy: capsuleData.privacy,
+                surprise: capsuleData.id,
+            },
+            {
+                headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log(response.data.payload)
+            })
             //try create and get back ID
-            capsuleData.id = 1000
 
-            const capsules = JSON.parse(localStorage.getItem('publicCapsuleJsonData'))
-            capsules.push(capsuleData)
-            localStorage.setItem('publicCapsuleJsonData', JSON.stringify(capsules))
+            // const capsules = JSON.parse(localStorage.getItem('publicCapsules'))
+            // capsules.push(capsuleData)
+            // localStorage.setItem('publicCapsules', JSON.stringify(capsules))
 
-            navigate('/capsule/' + capsuleData.id)
+            // navigate('/capsule/' + capsuleData.id)
 
         }else{
 
@@ -119,4 +146,22 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
     )
 }
 
+//functions
+function callGetUserCapsules(setCaps){
+    axios.get(API.getUserCapsulesApi, {
+        headers: {
+            Authorization: `Bearer ` + JSON.parse(localStorage.getItem('token'))
+    }})
+    .then(response => {
+        setCaps(response.data.payload)
+        localStorage.setItem('userCapsules', JSON.stringify(response.data.payload))
+    })
+}
+
+function trySetReady(didMount, setReady){
+    if (didMount.current){
+        setReady(true);
+    }else
+        didMount.current = true;
+}
 export default UserWall;
