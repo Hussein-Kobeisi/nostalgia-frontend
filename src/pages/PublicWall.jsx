@@ -2,28 +2,17 @@ import {useNavigate} from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import '../styles/common.css'
 import '../styles/PublicWall.css'
-import {CapsuleCard} from './components/capsuleCards.jsx'
+import {CapsuleCard} from '../components/capsuleCards.jsx'
 import '../classes/CapsuleData.jsx'
 import {CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
 import axios from 'axios';
 import * as API from '../apis/apis'
 import ClipLoader from "react-spinners/ClipLoader";
+import {trySettingIntervals, trySettingGroups} from '../utils/publicWallUtils.jsx'
 
 const PublicWall = () => {    
-    const didMountGroup = useRef(false);
-    const didMountInterval = useRef(false);
-    const [ready, setReady] = useState(false)
-    const [capsData, setCapData] = useState()
-    const [groups, setGroups] = useState()
-    const [intervals, setIntervals] = useState([])
-    const [loading, setLoading] = useState(false);
+    const { loading, ready, intervals, groups } = usePublicWallData();
     
-    useEffect(() => {callGetCapsules(setCapData); setLoading(true);}, []);
-    useEffect(() => trySettingGroups(didMountGroup, setGroups, capsData), [capsData]);
-    useEffect(() => trySettingIntervals(didMountInterval, setIntervals, groups), [groups]);
-    useEffect(() => {setReady(intervals.length); setLoading(!(intervals.length)); console.log('setting Ready..' + (intervals.length))}, [intervals]);
-
-
     if(!ready)
         return(<div className="mainPage flex-col publicMain">Loading...</div>)
 
@@ -82,9 +71,6 @@ const CapsuleList = ({capsData}) =>  {
         return () => scrollRef.current && scrollRef.current.removeEventListener('scroll', checkScrollPosition);
     }, []);
 
-    //map data from json
-    //getDisplayData() give media counts instead of arrays
-
     return(
     <div className='capsuleListDiv'>
         
@@ -128,39 +114,36 @@ function callGetUsers(capsules, setCapData) {
     })
 }
 
-function trySettingGroups(didMount, setGroups, capsData)
-{
-    if (didMount.current){
-        console.log('setting Groups..')
-        setGroups(groupCapsByInterval(capsData));
-    }else
-        didMount.current = true;
+//custom Hooks
+const usePublicWallData = () => {
+    const didMountGroup = useRef(false);
+    const didMountInterval = useRef(false);
+
+    const [capsData, setCapData] = useState();
+    const [groups, setGroups] = useState();
+    const [intervals, setIntervals] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        callGetCapsules(setCapData);
+    }, []);
+
+    useEffect(() => {
+        trySettingGroups(didMountGroup, setGroups, capsData);
+    }, [capsData]);
+
+    useEffect(() => {
+        trySettingIntervals(didMountInterval, setIntervals, groups);
+    }, [groups]);
+
+    useEffect(() => {
+        setReady(intervals.length > 0);
+        setLoading(!(intervals.length > 0));
+    }, [intervals]);
+
+    return { loading, ready, intervals, groups };
 }
-
-function groupCapsByInterval(capsData){
-    const groups = {};
-
-    capsData.forEach(cap => {
-        const year = new Date(cap.open_date).getFullYear();
-        const interval = Math.floor(year / 5) * 5;
-
-        if (!groups[interval]) {
-        groups[interval] = [];
-        }
-        groups[interval].push(cap);
-    });
-
-    return groups;
-};
-
-function trySettingIntervals(didMount, setIntervals, groups)
-{
-    if (didMount.current){
-        console.log('setting Intervals..')
-        setIntervals(Object.keys(groups).map(Number).sort((a, b) => b - a))
-    }else
-        didMount.current = true;
-}
-
 
 export default PublicWall;

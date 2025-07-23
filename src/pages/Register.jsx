@@ -1,7 +1,7 @@
 import '../styles/Register.css'
 import '../styles/common.css'
 import { useState } from 'react';
-import {LoginCard, SignUpCard} from './components/registerCards.jsx'
+import {LoginCard, SignUpCard} from '../components/registerCards.jsx'
 import { useSearchParams } from 'react-router-dom';
 
 

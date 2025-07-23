@@ -1,4 +1,4 @@
-import {PersonalCapsuleCard} from './components/capsuleCards.jsx'
+import {PersonalCapsuleCard} from '../components/capsuleCards.jsx'
 import '../styles/common.css'
 import '../styles/UserWall.css'
 import { CapsuleData, CapsuleSettings, CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';

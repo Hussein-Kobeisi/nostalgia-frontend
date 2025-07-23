@@ -1,4 +1,4 @@
-import '../../styles/popup.css'
+import '../styles/popup.css'
 import { useState } from 'react'
 
 export const Popup = ({msg = 'Success!', addClass='', visible, setVisible}) => {

@@ -1,5 +1,5 @@
 import '../styles/UserProfile.css'
-import {Popup} from './components/popup'
+import {Popup} from '../components/popup'
 import { useState } from 'react'
 import * as API from '../apis/apis'
 import axios from 'axios';
