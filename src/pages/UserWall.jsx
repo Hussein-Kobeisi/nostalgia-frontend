@@ -1,4 +1,4 @@
-import {PersonalCapsuleCard} from './components/capsuleCards.jsx'
+import {PersonalCapsuleCard} from '../components/capsuleCards.jsx'
 import '../styles/common.css'
 import '../styles/UserWall.css'
 import { CapsuleData, CapsuleSettings, CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
@@ -106,16 +106,8 @@ const CapsuleCreationPopup = ({setCreating, user, setLoading}) => {
                 setLoading(true)
             })
 
-        }else{
-
         }
-        //attempt to create
-        //retrieve id from response
-
-        //add capsule to localStorage
-        //navigate to capsule with ID
-
-        // navigate('/capsule/' + capsule.id)
+        setLoading(false)
     }
 
     return(
@@ -160,7 +152,8 @@ function callGetUserCapsules(setCaps, setLoading){
         setCaps(response.data.payload)
         localStorage.setItem('userCapsules', JSON.stringify(response.data.payload))
     })
-    .catch(() => {
+    .catch(e => {
+        console.log(e)
         setLoading(false)
     })
 }

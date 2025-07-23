@@ -1,24 +1,12 @@
-import '../../styles/capsuleCards.css'
+import '../styles/capsuleCards.css'
 import {useNavigate} from 'react-router-dom'
 import {useEffect, useState} from 'react';
-import * as API from '../../apis/apis'
+import * as API from '../apis/apis'
 
 
 export const CapsuleCard = ({capData}) => {
     const navigate = useNavigate()
-    const [user, setUser] = useState({
-        img: '/storage/uploads/p13.png',
-        name: ''
-    });
-
-    //only on load: handle user data (in case user not found)
-    useEffect(() => {
-        if(capData.user){
-            setUser(prev => ({...prev, name: capData.user.name ?? ''}));
-            // setUser(prev => ({...prev, img: capData.user.img ?? ''}));
-        }
-    }
-    , []);
+    const user = useUserFromCapsule(capData);
 
     return(
         <div className="capsuleCardMain flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
@@ -44,3 +32,23 @@ export const PersonalCapsuleCard = ({capData}) => {
         </div>
     )
 }
+
+//custom Hooks
+const useUserFromCapsule = (capData) => {
+    const [user, setUser] = useState({
+        img: '',
+        name: '',
+    });
+
+    useEffect(() => {
+        if (capData.user) {
+            setUser((prev) => ({
+                ...prev,
+                name: capData.user.name ?? '',
+                img: capData.user.img ?? prev.img,
+            }));
+        }
+    }, [capData.user]);
+
+    return user;
+};

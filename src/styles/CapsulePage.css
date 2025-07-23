@@ -114,6 +114,8 @@
     display: flex;
     padding-top: 5em;
     flex-direction: column;
+
+    overflow-x: hidden;
 }
 
 .capsulePageTitle{

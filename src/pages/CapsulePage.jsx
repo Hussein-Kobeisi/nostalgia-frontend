@@ -18,7 +18,7 @@ const CapsulePage = () => {
     const id = useParams().id;
     
     
-    useEffect(() => {callGetMedia(id, setMedia);setUserId(findUserID(id))}, []);
+    useEffect(() => {callGetMedia(id, setMedia, setLoading);setUserId(findUserID(id))}, []);
 
     const handleMediaUploaded = async (event) => {
         const file = event.target.files[0];
@@ -106,9 +106,11 @@ const UploadMediaPopup = (setUploading) => {
 }
 
 //functions
-function callGetMedia(id, setMedia){
+function callGetMedia(id, setMedia, setLoading){
+    setLoading(true)
     axios.get(API.getMediaByCapsuleIdApi+id)
     .then(response => {
+        setLoading(false)
         setMedia(response.data.payload)
     })
 }
