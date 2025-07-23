@@ -1,0 +1,21 @@
+.userProfileMain{
+    justify-content: center;
+}
+
+.userProfileFormDiv{
+}
+
+.userFieldsCol{
+    gap:2em
+}
+
+.userProfileInput{
+    margin: 0;
+    width: 20em;
+}
+
+.userFormRow{
+    width: 60%;
+    display: grid;
+    grid-template-columns: 10dvw 1fr;
+}

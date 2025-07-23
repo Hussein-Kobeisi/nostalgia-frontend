@@ -4,39 +4,50 @@ import '../styles/common.css'
 import '../styles/PublicWall.css'
 import {CapsuleCard} from './components/capsuleCards.jsx'
 import '../classes/CapsuleData.jsx'
-import { CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
+import {CapsuleListFromJson, dummyData } from '../classes/CapsuleData.jsx';
+import axios from 'axios';
+import * as API from '../apis/apis'
+import ClipLoader from "react-spinners/ClipLoader";
 
-const PublicWall = () => {
-    //Axios get data + distribute by year
-    const jsonData = dummyData;
+const PublicWall = () => {    
+    const didMountGroup = useRef(false);
+    const didMountInterval = useRef(false);
+    const [ready, setReady] = useState(false)
+    const [capsData, setCapData] = useState()
+    const [groups, setGroups] = useState()
+    const [intervals, setIntervals] = useState([])
+    const [loading, setLoading] = useState(false);
+    
+    useEffect(() => {callGetCapsules(setCapData); setLoading(true);}, []);
+    useEffect(() => trySettingGroups(didMountGroup, setGroups, capsData), [capsData]);
+    useEffect(() => trySettingIntervals(didMountInterval, setIntervals, groups), [groups]);
+    useEffect(() => {setReady(intervals.length); setLoading(!(intervals.length)); console.log('setting Ready..' + (intervals.length))}, [intervals]);
 
-    localStorage.setItem('publicCapsuleJsonData', JSON.stringify(jsonData));
+
+    if(!ready)
+        return(<div className="mainPage flex-col publicMain">Loading...</div>)
 
     return(
     <div className="mainPage flex-col publicMain">
+        {loading && <div className='loaderDiv'><ClipLoader loading={loading} size={35} /></div>}
         <div className='publicTextDiv flex-col items-center'>
             <div className='bigPublicText'>Moments Shared by Others</div>
             <div className='smallPublicText'>Dig deep and explore!</div>
         </div>
 
-        <div className='publicYearDiv flex-col items-center'>
-            2020s
-        </div>
-        <CapsuleList capsuleJsonData={jsonData} />
-        
-        <div className='publicYearDiv flex-col items-center'>
-            2015s
-        </div>
-        <CapsuleList capsuleJsonData={jsonData}/>
-
-        <div className='publicYearDiv flex-col items-center'>
-            2010s
-        </div>
-        <CapsuleList capsuleJsonData={jsonData}/>
+        {intervals.map(interval => (
+            <div key={interval}>
+                <div className="publicYearDiv flex-col items-center">
+                    {interval}s
+                </div>
+                <CapsuleList capsData={groups[interval]} />
+            </div>
+        ))}
     </div>
 )}
 
-const CapsuleList = ({capsuleJsonData}) =>  {
+//components
+const CapsuleList = ({capsData}) =>  {
 
     const scrollRef = useRef(null)
     const scrollAmount = window.innerWidth * 0.9;
@@ -73,7 +84,6 @@ const CapsuleList = ({capsuleJsonData}) =>  {
 
     //map data from json
     //getDisplayData() give media counts instead of arrays
-    const capslist = CapsuleListFromJson(capsuleJsonData).map(item => item.getDisplayData())
 
     return(
     <div className='capsuleListDiv'>
@@ -83,13 +93,74 @@ const CapsuleList = ({capsuleJsonData}) =>  {
         
         <div className='publicDisplayRow  flex-row' ref={scrollRef}>
             {
-                capslist.map( item => (<CapsuleCard key={item.id} capData={item} />))
+                capsData.map( item => (<CapsuleCard key={item.id} capData={item} />))
             }
         </div>
 
     </div>
 )}
 
+//functions
+function callGetCapsules(setCapData) {
+    console.log('getting Capsules..')
+    axios.get(API.getPublicCapsulesApi)
+    .then(respone => {
+        console.log(respone)
+        localStorage.setItem('publicCapsules', JSON.stringify(respone.data.payload));
+        callGetUsers(respone.data.payload, setCapData)
+    })
+}
+
+function callGetUsers(capsules, setCapData) {
+    console.log('getting Users..')
+    axios.get(API.getUsersApi)
+    .then(respone => {
+        console.log(respone)
+        let usersData = respone.data.payload
+        localStorage.setItem('users', JSON.stringify(usersData));
+
+        //add users to their capsules
+        setCapData(capsules.map(cap => {
+            const user = usersData.find(user => user.id === cap.user_id) || null;
+            return {...cap, 
+                    user: user};
+        }))
+    })
+}
+
+function trySettingGroups(didMount, setGroups, capsData)
+{
+    if (didMount.current){
+        console.log('setting Groups..')
+        setGroups(groupCapsByInterval(capsData));
+    }else
+        didMount.current = true;
+}
+
+function groupCapsByInterval(capsData){
+    const groups = {};
+
+    capsData.forEach(cap => {
+        const year = new Date(cap.open_date).getFullYear();
+        const interval = Math.floor(year / 5) * 5;
+
+        if (!groups[interval]) {
+        groups[interval] = [];
+        }
+        groups[interval].push(cap);
+    });
+
+    return groups;
+};
+
+function trySettingIntervals(didMount, setIntervals, groups)
+{
+    if (didMount.current){
+        console.log('setting Intervals..')
+        setIntervals(Object.keys(groups).map(Number).sort((a, b) => b - a))
+    }else
+        didMount.current = true;
+}
 
 
 export default PublicWall;

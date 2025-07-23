@@ -1,0 +1,131 @@
+.userWallMain{
+    color: white;
+    padding: 2dvw;
+    padding-top: 7dvw;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 2.5dvw;
+    flex-shrink: 1;
+}
+
+.newCapsuleButton{
+    font-size: 1.7dvw;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    height: 1.5em;
+
+    border-radius: 1em;
+    bottom: 4%;
+    right: 3%;
+
+    background-color: #A3CBDE; 
+
+    padding: 0 .5em;
+    border: .1em solid #222355;
+    
+
+    z-index: 1;
+    position: fixed;
+
+    transition: .1s ease-out;
+}
+    .newCapsuleButton:hover{
+        transform: scale(1.1);
+        border: .1em solid white;
+    }
+
+.personalCapsuleDiv{
+    gap: 3dvw;
+    /* padding-top: 10em; */
+    justify-content: start;
+    border: red 6px solid;
+}
+
+
+
+.creationPopupBackDrop{
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+
+    z-index: 1;
+    top: 0;
+    right: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    /* padding-top: 15dvh; */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.creationPopupDiv{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    font-weight: 600;
+    color: #222355;
+    font-size: 1.2dvw;
+
+    background-color: #A3CBDE;
+    width: 40dvw;
+    height: 30dvw;
+    border-radius: 2dvw;
+
+    padding: 3em 0;
+
+    gap:.5em;
+}
+
+.creationPopupInput{
+    font-size: .63em;
+
+    height: 2.6em;
+    width: 13.5em;
+    background-color: #FFFFFF;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .3em 2em;
+}
+
+.creationPopupDatePicker{
+    font-size: .63em;
+    color: black;
+    font-weight: 600;
+
+    height: 2.6em;
+    width: 13.5em;
+    background-color: #FFFFFF;
+    border: .2em var(--mainColor) solid;
+    border-radius: 5em;
+    padding: .2em 1em;
+    margin: .3em 2em;
+}
+
+.creationRadioLabel{
+    margin: 0 0 0 1em;
+}
+    .creationRadioLabel:hover{
+        cursor: pointer;
+    }
+
+.createBtn{
+    font-size: 1.1dvw;
+}
+
+.inputUserErrorMsg{
+    color: red;
+    font-size: .7em;
+    padding: 0;
+    margin: 0;
+}
+

@@ -1,6 +1,11 @@
 .capsuleCardMain{
+    flex-shrink: 0;
+    flex-grow: 0;
+
     height: 22dvw;
-    aspect-ratio: 3/4;
+    width: 17dvw;
+
+    text-align: center;
 
     background-color: #B6A3F1;
     border: #FFDFC7 solid .5em;
@@ -18,6 +23,13 @@
         transform: scale(1.1);
         cursor: pointer;
     }
+.capsuleUsername{
+    margin-right: auto;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
 
 .capsuleUserImage{
     background-color: white;
@@ -30,25 +42,34 @@
     margin: .2em;
 }
 
-.capsuleUsername{
-    
-}
-
 .capsuleUserDiv{
     font-size: 150%;
 
     width: 100%;
     padding: .3em;
-
-
 }
 
 .capsuleNameText{
-    font-size: 200%;
+    font-size: 2dvw;
+    width: 100%;
+    height: auto;
+
     margin-top: 25%;
     margin-bottom: 10%;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Ensure it wraps */
 }
 
-.capsuleContentsDiv{
+.capsulePersonalCardMain{
+    margin: 0;
+    
+    text-align: center;
+}
 
+.capsuleDateText{
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 2em;
 }
