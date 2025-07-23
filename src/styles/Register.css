@@ -123,15 +123,16 @@
     border-color: red;
 }
 
-@media(max-width: 900px) {
-    .main{
+@media(max-aspect-ratio: 1/1) {
+    .regPage{
+        display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 9dvh;
     }
 
-    .title{
-        font-size: 10dvh;
+    .regTitle{
+        font-size: 7dvh;
     }
 
     .registerCard{

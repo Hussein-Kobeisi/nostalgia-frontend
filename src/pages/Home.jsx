@@ -1,15 +1,21 @@
 import {useNavigate} from 'react-router-dom';
 import '../styles/common.css'
 import '../styles/Home.css'
+import {HomeCapsuleCard} from '../components/capsuleCards.jsx'
 
 const Home = () => {
     const navigate = useNavigate()
+    const capsules = JSON.parse(localStorage.getItem('publicCapsules'))
 
     return(
     <div className="mainPage flex-row homePage">
         <div className='flex-col items-center homeDiv1'>
             <p className='homeText'>{homeText}</p>
-            <div className='homeText'> 3 capsules here</div>
+            <div className='flex-row homeCapsules'>
+                <HomeCapsuleCard className="homeCap" capData={capsules[0]}/>
+                <HomeCapsuleCard className="homeCap" capData={capsules[1]}/>
+                <HomeCapsuleCard className="homeCap" capData={capsules[2]}/>
+            </div>
         </div>
         <div className='flex-col items-center homeDiv2'>
             <p className='homeTitle'>Nostalgia</p>

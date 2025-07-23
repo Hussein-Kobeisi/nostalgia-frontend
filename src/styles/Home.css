@@ -15,6 +15,7 @@
 
     padding-right: 10dvw;
     padding-left: 10vw;
+    overflow-x: hidden;
 }
 
 .homeTitle{
@@ -57,4 +58,51 @@
 
 .homeDiv2{
     gap: 20dvh;
+}
+
+.homeCap{
+    font-size: 2dvw;
+}
+
+@media (max-aspect-ratio: 1/1){
+    .homePage{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .homeDiv1{
+        gap: 0;
+        order: 2;
+    }
+
+    .homeDiv2{
+        gap: 0;
+        order: 1;
+    }
+
+    .homeTitle{
+        font-size: 15dvw;
+        margin-bottom: 1em;
+    }
+
+    .homeBtn{
+        font-size: 4.5dvw;
+    }
+
+    .homeText{
+        font-size: 3dvw;
+        margin-bottom: 3em;
+    }
+
+    .capsuleCardMainHome{
+        height: 30dvw;
+        width: 23.1dvw;
+        font-size: 1.43dvw;
+    }
+
+    .capsuleUserImageHome{
+        height: 1.5em;
+        width: 1.5em;
+    }
 }

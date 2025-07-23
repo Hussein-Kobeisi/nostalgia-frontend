@@ -22,7 +22,7 @@ const UserProfile = () => {
 
     return(
     <div className='mainPage novaFont userProfileMain'>
-        <div className='creationPopupDiv flex-col'>
+        <div className='creationPopupDiv creationPopupDivUser flex-col'>
 
             <UserInputFields inputFields={inputFields} userState={userState} errors={errors} handleInputChange={handleInputChange}/>
             <button className='cardBtn createBtn' onClick={() => {handleSubmit()}}>Save Changes</button>

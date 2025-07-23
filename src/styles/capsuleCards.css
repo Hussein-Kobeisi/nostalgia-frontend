@@ -73,3 +73,38 @@
     margin-top: auto;
     margin-bottom: 2em;
 }
+
+
+/* Home */
+.capsuleCardMainHome{
+    height: 17dvw;
+    width: 13.1dvw;
+    font-size: .81dvw;
+}
+
+.capsuleUserImageHome{
+    height: 1.5em;
+    width: 1.5em;
+}
+
+@media(max-aspect-ratio: 1/1){
+    .capsuleCardMain{
+        height: 60dvw;
+        width: 46.2dvw;
+        font-size: 3dvw;
+    }
+
+    .capsuleUserImage{
+        height: 1.5em;
+        width: 1.5em;
+        margin-right: .2em;
+    }
+    .capsuleUserDiv{
+        font-size: 150%;
+        padding: .1em;
+    }
+
+    .capsuleNameText{
+        font-size: 6dvw;
+    }
+}

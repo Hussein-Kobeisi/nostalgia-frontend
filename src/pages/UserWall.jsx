@@ -131,7 +131,7 @@ const CapsuleCreationPopup = ({setCreating, user, setLoading}) => {
                     <div><input type='checkbox' value={inputs.surprise} onClick={() => handleInputChange('surprise', !inputs.surprise)}/> {' '}Surprise Me? </div>
                     <br/>
                     
-                    <div>
+                    <div className='creationPopupBtnsDiv'>
                         <button className='cardBtn createBtn' onClick={callCreateCapsuleRequest}>Create</button> 
                         <button className='cardBtn createBtn' onClick={() => setCreating(false)}>Cancel</button>
                     </div>
