@@ -71,8 +71,11 @@ function callSignupApi(loading, setLoading, setErrors, username, email, password
             password: password,
         })
         .then((response) => {
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            localStorage.setItem('token', JSON.stringify(response.data.authorisation.token));
+            console.log(response)
+            const user = response.data.payload
+            const token = response.data.authorisation.token
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', JSON.stringify(token));
             onSuccess();
             setLoading(false);
         })
@@ -92,8 +95,10 @@ function callLoginApi(loading, setLoading, setErrors, email, password, onSuccess
             password: password
         })
         .then((response) => {
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            localStorage.setItem('token', JSON.stringify(response.data.authorisation.token));
+            const user = response.data.payload
+            const token = response.data.authorisation.token
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', JSON.stringify(token));
             onSuccess();
             setLoading(false);
         })
