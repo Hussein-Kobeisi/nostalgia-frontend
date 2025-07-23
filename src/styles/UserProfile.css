@@ -2,9 +2,6 @@
     justify-content: center;
 }
 
-.userProfileFormDiv{
-}
-
 .userFieldsCol{
     gap:2em
 }
@@ -18,4 +15,20 @@
     width: 60%;
     display: grid;
     grid-template-columns: 10dvw 1fr;
+}
+
+@media(max-aspect-ratio:1/1){
+    .userFormRow{
+        width: 100%;
+        justify-content: space-evenly;
+        grid-template-columns: auto;
+    }
+    .creationPopupDivUser{
+        padding-top: 2em;
+        padding-bottom: 2em;
+        height: 100dvw;
+    }
+    .inputErrorMsg{
+        font-size: 2.5dvw;
+    }
 }

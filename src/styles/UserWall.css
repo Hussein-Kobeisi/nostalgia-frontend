@@ -129,3 +129,28 @@
     margin: 0;
 }
 
+@media(max-aspect-ratio: 1/1){
+    .userWallMain{
+        padding-top: 20dvw;
+    }
+    .newCapsuleButton{
+        font-size: 6dvw;
+    }
+
+    .creationPopupDiv{
+        width: 80dvw;
+        height: 90dvw;
+        border-radius: 1em;
+        font-size: 4dvw;
+    }
+
+    .createBtn{
+        justify-self: center;
+        font-size: 4dvw;
+    }
+    .creationPopupBtnsDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

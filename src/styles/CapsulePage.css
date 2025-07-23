@@ -144,3 +144,33 @@ input[type="file"] {
     color: white;
     background-color: #4338ca; /* indigo-700 */
 }
+
+@media(max-aspect-ratio:1/1){
+    .capsulePageTitle{
+        font-size: 8dvw;
+    }
+
+    .capsulePageMain{
+        color: white;
+        padding: 2em;
+        padding-top: 3em;
+        gap: 3em;
+
+        justify-content: center;
+    }
+
+    .capsuleImage{
+        height: 40dvw;
+    }
+
+    .capsuleVideo{
+        height: 40dvw;
+    }
+
+    .capsuleText{    
+        font-size: 4.2dvw;
+        min-height: 40dvw;
+        width: 70dvw;
+        aspect-ratio: 2/1;
+    }
+}

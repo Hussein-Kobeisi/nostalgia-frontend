@@ -33,6 +33,22 @@ export const PersonalCapsuleCard = ({capData}) => {
     )
 }
 
+export const HomeCapsuleCard = ({capData}) => {
+    const navigate = useNavigate()
+    const user = useUserFromCapsule(capData);
+
+    return(
+        <div className="capsuleCardMain capsuleCardMainHome flex-col items-center" onClick={() => navigate('/capsule/' + capData.id)}>
+            <div className='flex-row justify-start items-center capsuleUserDiv'>
+                <img className='capsuleUserImage capsuleUserImageHome' src={API.mainRoute+user.img} alt='capsule' />
+                <p className='capsuleUsername'>{user.name}</p>
+            </div>
+            <p className='capsuleNameText'>{capData.name}</p>
+            <p className='capsuleDateText'>{'Opened at:' + capData.open_date}</p>
+        </div>
+    )
+}
+
 //custom Hooks
 const useUserFromCapsule = (capData) => {
     const [user, setUser] = useState({

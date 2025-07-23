@@ -95,3 +95,22 @@
         opacity: 50%;
         cursor: auto;
     }
+
+@media(max-aspect-ratio: 1/1){
+    .publicMain{
+        padding-top: 4em;
+    }
+
+    .bigPublicText{
+        font-size: 7dvw;        
+    }
+
+    .smallPublicText{
+        font-size: 5dvw;
+        padding-bottom: 3em;
+    }
+
+    .capsuleListScrollBtn{
+        font-size: 6dvw;
+    }
+}
