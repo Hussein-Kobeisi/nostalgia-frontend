@@ -18,17 +18,18 @@ const UserWall = () => {
     const [creating, setCreating] = useState(false)
     const [caps, setCaps] = useState()
     const [ready, setReady] = useState(false)
+    const [loading, setLoading] = useState(false)
     const jsonData = dummyData;
 
-    useEffect(() => {callGetUserCapsules(setCaps)}, []);
+    useEffect(() => {callGetUserCapsules(setCaps, setLoading)}, []);
     useEffect(() => trySetReady(didMount, setReady), [caps])
 
     return(
     <div className="mainPage userWallMain">
         {ready && <PersonalCapsuleList capsuleJsonData={caps}/>}
         <button className="newCapsuleButton" onClick={() => setCreating(true)}> Create New </button>
-        {creating && <CapsuleCreationPopup setCreating={setCreating} user={user}/>}
-        {!ready && <div className='loaderDiv'><ClipLoader loading={!ready} size={35} /></div>}
+        {creating && <CapsuleCreationPopup setCreating={setCreating} setLoading={setLoading} user={user}/>}
+        {loading && <div className='loaderDiv'><ClipLoader loading={loading} size={35} /></div>}
     </div>
 )}
 
@@ -47,7 +48,7 @@ const PersonalCapsuleList = ({capsuleJsonData}) =>  {
     </>
 )}
 
-const CapsuleCreationPopup = ({setCreating, user}) => {
+const CapsuleCreationPopup = ({setCreating, user, setLoading}) => {
     const [inputs, setInputs] = useState({
         name: '',
         openDate: new Date(),
@@ -78,14 +79,14 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
             const capSettings = new CapsuleSettings(inputs.name, new Date(), inputs.openDate, inputs.privacy, inputs.surprise)
             const capsuleData = new CapsuleData(undefined, user, capSettings)
             const token = JSON.parse(localStorage.getItem('token'))
-
+            setLoading(true)
             axios.post(API.addOrUpdateCapsuleApi, {
                 user_id: user.id,
                 name: capsuleData.name,
                 create_date: (new Date()).toISOString().slice(0, 19).replace('T', ' '),
                 open_date: capsuleData.openDate.toISOString().slice(0, 19).replace('T', ' '),
                 privacy: capsuleData.privacy,
-                surprise: capsuleData.id,
+                surprise: capsuleData.surprise,
             },
             {
                 headers: {
@@ -94,15 +95,16 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
                 }
             })
             .then(response => {
-                console.log(response.data.payload)
+                let capsules = JSON.parse(localStorage.getItem('userCapsules'))
+                capsules.push(response.data.payload)
+                localStorage.setItem('userCapsules', JSON.stringify(capsules))
+                setLoading(false)
+                navigate('/capsule/' + response.data.payload.id)
             })
-            //try create and get back ID
-
-            // const capsules = JSON.parse(localStorage.getItem('publicCapsules'))
-            // capsules.push(capsuleData)
-            // localStorage.setItem('publicCapsules', JSON.stringify(capsules))
-
-            // navigate('/capsule/' + capsuleData.id)
+            .catch((e) =>{
+                console.log(e)
+                setLoading(true)
+            })
 
         }else{
 
@@ -147,14 +149,19 @@ const CapsuleCreationPopup = ({setCreating, user}) => {
 }
 
 //functions
-function callGetUserCapsules(setCaps){
+function callGetUserCapsules(setCaps, setLoading){
+    setLoading(true)
     axios.get(API.getUserCapsulesApi, {
         headers: {
             Authorization: `Bearer ` + JSON.parse(localStorage.getItem('token'))
     }})
     .then(response => {
+        setLoading(false)
         setCaps(response.data.payload)
         localStorage.setItem('userCapsules', JSON.stringify(response.data.payload))
+    })
+    .catch(() => {
+        setLoading(false)
     })
 }
 

@@ -68,7 +68,7 @@ button, input{
 
 .loaderDiv{
     position: absolute;
-    z-index: 2;
+    z-index: 200;
     background-color: rgba(255, 255, 255, 0.368);
     padding: .7em;
     padding-bottom: 0.2em;
