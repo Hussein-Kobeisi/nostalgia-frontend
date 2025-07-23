@@ -1,76 +1,23 @@
 import '../styles/UserProfile.css'
 import {Popup} from '../components/popup'
-import { useState } from 'react'
-import * as API from '../apis/apis'
-import axios from 'axios';
+import {useState, useCallback } from 'react'
 import ClipLoader from "react-spinners/ClipLoader";
+import {handleProfileSubmit } from '../utils/userProfileUtils';
 
 const UserProfile = () => {
     let user = JSON.parse(localStorage.getItem('user'))
-
     const inputFields = ['name', 'email', 'mobile', 'password', 'confirm']
-    const [userState, setUserState] = useState({
-        name: user.name ?? '',
-        email: user.email ?? '',
-        mobile: user.mobile ?? '',
-        password: user.password ?? '',
-        confirm:user.password ?? ''
-    })
-    const [errors, setErrors] = useState({})
 
-    const [visibleSuccessPopup, setVisibleSuccessPopup] = useState(false)
-    const [visibleFailedPopup, setVisibleFailedPopup] = useState(false)
-    const [loading, setLoading] = useState(false);
+    const {
+        userState, setUserState, errors, setErrors, loading,
+        visibleSuccessPopup, visibleFailedPopup, handleSubmit,
+        setVisibleSuccessPopup, setVisibleFailedPopup
+    } = useUserUpdate(user);
 
     const handleInputChange = (field, value) => {
         setUserState(prev => ({ ...prev, [field]: value }));
         setErrors(prev => ({ ...prev, [field]: '' }));
     };
-
-    const validate = () => {
-        const newErrors = {};
-
-        if (userState.name != '' && !userState.name.trim()) newErrors.name = '*User Name is required';
-        if (userState.email != '' && !userState.email.includes('@')) newErrors.email = '*Email should be a valid domain';
-        if (userState.mobile != '' && !userState.mobile.match(/^\d{10}$/)) newErrors.mobile = '*Mobile should be a 10-digit numebr';
-        if (userState.password != '' && userState.password.length < 6) newErrors.password = '*Password should be at least 6 characters';
-        if (userState.confirm != '' && userState.confirm != userState.password) newErrors.confirm = "*Passwords don't match";
-
-        setErrors(newErrors);
-
-        return Object.keys(newErrors).length === 0;
-    }
-
-    const handleSubmit = () => {
-        if(validate()){
-            
-            setLoading(true)
-
-            axios.post(API.updateUserApi, {
-                id: user.id,
-                name: userState.name,
-                mobile: userState.mobile,
-                email: userState.email,
-                password: userState.password
-            },
-            {
-                headers: {
-                'Authorization': 'Bearer '+JSON.parse(localStorage.getItem('token')),
-                'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                setLoading(false)
-                user = response.data.payload
-                localStorage.setItem('user', JSON.stringify(user))
-                setVisibleSuccessPopup(true)
-            })
-            .catch(() => {
-                setLoading(false)
-                setVisibleFailedPopup(true)
-            })          
-        }
-    }
 
 
     return(
@@ -78,7 +25,7 @@ const UserProfile = () => {
         <div className='creationPopupDiv flex-col'>
 
             <UserInputFields inputFields={inputFields} userState={userState} errors={errors} handleInputChange={handleInputChange}/>
-            <button className='cardBtn createBtn' onClick={handleSubmit}>Save Changes</button>
+            <button className='cardBtn createBtn' onClick={() => {handleSubmit()}}>Save Changes</button>
             <Popup visible={visibleSuccessPopup} setVisible={setVisibleSuccessPopup}/>
             <Popup visible={visibleFailedPopup} setVisible={setVisibleFailedPopup} msg='Try Again!' addClass='fail'/>
             {loading && <div className='loaderDiv'><ClipLoader loading={loading} size={35} /></div>}
@@ -99,6 +46,39 @@ const UserInputFields = ({inputFields, userState, errors, handleInputChange}) =>
             </div>
         )
     )
+}
+
+//custom Hooks
+const useUserUpdate = (user) => {
+    const [userState, setUserState] = useState({
+        name: user.name || '',
+        email: user.email || '',
+        mobile: user.mobile || '',
+        password: '',
+        confirm: '',
+    });
+
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [visibleSuccessPopup, setVisibleSuccessPopup] = useState(false);
+    const [visibleFailedPopup, setVisibleFailedPopup] = useState(false);
+
+    const handleSubmit = useCallback(() => {
+        handleProfileSubmit(user, userState, setErrors, setLoading, setVisibleSuccessPopup, setVisibleFailedPopup);
+    }, [user, userState]);
+
+    return {
+        userState, 
+        setUserState, 
+        errors, 
+        setErrors,
+        loading,
+        visibleSuccessPopup,
+        visibleFailedPopup,
+        handleSubmit,
+        setVisibleSuccessPopup,
+        setVisibleFailedPopup,
+    };
 }
 
 export default UserProfile;
